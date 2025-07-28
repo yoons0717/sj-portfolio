@@ -5,11 +5,31 @@ type Project = Database['public']['Tables']['projects']['Row']
 type ProjectInsert = Database['public']['Tables']['projects']['Insert']
 type ProjectUpdate = Database['public']['Tables']['projects']['Update']
 
-// 모든 프로젝트 가져오기
-export async function getProjects() {
+// 프로젝트와 카테고리 정보를 함께 가져오는 타입
+export interface ProjectWithCategory extends Omit<Project, 'category_id'> {
+    category: {
+        id: string
+        name: string
+        color: string
+        icon: string
+    } | null
+}
+
+// 모든 프로젝트 가져오기 (카테고리 정보 포함)
+export async function getProjects(): Promise<ProjectWithCategory[] | null> {
     const { data, error } = await supabase
         .from('projects')
-        .select('*')
+        .select(
+            `
+      *,
+      category:categories (
+        id,
+        name,
+        color,
+        icon
+      )
+    `
+        )
         .order('created_at', { ascending: false })
 
     if (error) {
@@ -17,30 +37,26 @@ export async function getProjects() {
         return null
     }
 
-    return data
+    return data as ProjectWithCategory[]
 }
 
-// 카테고리별 프로젝트 가져오기
-export async function getProjectsByCategory(category: string) {
+// 특정 프로젝트 가져오기 (카테고리 정보 포함)
+export async function getProject(
+    id: string
+): Promise<ProjectWithCategory | null> {
     const { data, error } = await supabase
         .from('projects')
-        .select('*')
-        .eq('category', category)
-        .order('created_at', { ascending: false })
-
-    if (error) {
-        console.error('Error fetching projects by category:', error)
-        return null
-    }
-
-    return data
-}
-
-// 특정 프로젝트 가져오기
-export async function getProject(id: string) {
-    const { data, error } = await supabase
-        .from('projects')
-        .select('*')
+        .select(
+            `
+      *,
+      category:categories (
+        id,
+        name,
+        color,
+        icon
+      )
+    `
+        )
         .eq('id', id)
         .single()
 
@@ -49,7 +65,7 @@ export async function getProject(id: string) {
         return null
     }
 
-    return data
+    return data as ProjectWithCategory
 }
 
 // 프로젝트 생성
@@ -57,7 +73,17 @@ export async function createProject(project: ProjectInsert) {
     const { data, error } = await supabase
         .from('projects')
         .insert(project)
-        .select()
+        .select(
+            `
+      *,
+      category:categories (
+        id,
+        name,
+        color,
+        icon
+      )
+    `
+        )
         .single()
 
     if (error) {
@@ -65,7 +91,7 @@ export async function createProject(project: ProjectInsert) {
         throw error
     }
 
-    return data
+    return data as ProjectWithCategory
 }
 
 // 프로젝트 수정
@@ -74,7 +100,17 @@ export async function updateProject(id: string, project: ProjectUpdate) {
         .from('projects')
         .update({ ...project, updated_at: new Date().toISOString() })
         .eq('id', id)
-        .select()
+        .select(
+            `
+      *,
+      category:categories (
+        id,
+        name,
+        color,
+        icon
+      )
+    `
+        )
         .single()
 
     if (error) {
@@ -82,7 +118,7 @@ export async function updateProject(id: string, project: ProjectUpdate) {
         throw error
     }
 
-    return data
+    return data as ProjectWithCategory
 }
 
 // 프로젝트 삭제
@@ -97,28 +133,35 @@ export async function deleteProject(id: string) {
     return true
 }
 
-// 카테고리별 프로젝트 개수 가져오기
+// 메인 페이지용: 카테고리별 프로젝트 개수
 export async function getCategoriesWithCount() {
-    const { data, error } = await supabase.from('projects').select('category')
+    const { data, error } = await supabase
+        .from('categories')
+        .select(
+            `
+      id,
+      name,
+      color,
+      icon,
+      sort_order,
+      projects:projects(count)
+    `
+        )
+        .eq('is_active', true)
+        .order('sort_order', { ascending: true })
 
     if (error) {
-        console.error('Error fetching categories:', error)
+        console.error('Error fetching categories with count:', error)
         return null
     }
 
-    // 카테고리별 개수 계산
-    const categoryCounts = data.reduce(
-        (acc: Record<string, number>, project) => {
-            const category = project.category || 'Uncategorized'
-            acc[category] = (acc[category] || 0) + 1
-            return acc
-        },
-        {}
-    )
-
-    return Object.entries(categoryCounts).map(([name, count]) => ({
-        name,
-        count,
-        thumbnail: `https://images.unsplash.com/photo-${Math.random() > 0.5 ? '1556742049-0cfed4f6a45d' : '1461749280684-dccba630e2f6'}?w=400&h=400&fit=crop`,
+    return data.map((category) => ({
+        id: category.id,
+        name: category.name,
+        count: category.projects?.[0]?.count || 0,
+        color: category.color,
+        icon: category.icon,
+        // 기본 썸네일 (나중에 카테고리별로 설정 가능)
+        thumbnail: `https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop`,
     }))
 }
