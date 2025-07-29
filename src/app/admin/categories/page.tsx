@@ -9,6 +9,7 @@ import {
     deleteCategory,
 } from '@/lib/api/categories'
 import { Category, CategoryFormData } from '@/types'
+import LoadingState from '@/components/LoadingState'
 
 const iconOptions = [
     { value: 'presentation', label: '📊 Presentation' },
@@ -156,16 +157,7 @@ export default function CategoriesPage() {
     }
 
     if (isLoading) {
-        return (
-            <div className="min-h-screen bg-[#231023] flex items-center justify-center">
-                <div className="flex flex-col items-center space-y-4">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c893c8]"></div>
-                    <div className="text-white text-lg">
-                        Loading categories...
-                    </div>
-                </div>
-            </div>
-        )
+        return <LoadingState />
     }
 
     return (

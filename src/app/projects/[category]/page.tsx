@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import LoadingState from '@/components/LoadingState'
 interface Project {
     id: number
     title: string
@@ -100,11 +101,7 @@ export default function CategoryProjectsPage() {
     }
 
     if (isLoading) {
-        return (
-            <div className="min-h-screen bg-[#23101d] flex items-center justify-center">
-                <div className="text-white text-lg">Loading...</div>
-            </div>
-        )
+        return <LoadingState />
     }
 
     return (

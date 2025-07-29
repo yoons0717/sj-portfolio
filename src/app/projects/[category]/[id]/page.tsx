@@ -5,6 +5,7 @@ import { Edit, Trash2, Save, X } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import LoadingState from '@/components/LoadingState'
 
 // 마크다운 에디터를 동적으로 import (SSR 방지)
 const MDEditor = dynamic(
@@ -261,11 +262,7 @@ export default function ProjectDetailPage({
     }
 
     if (isLoading) {
-        return (
-            <div className="min-h-screen bg-[#231023] flex items-center justify-center">
-                <div className="text-white text-lg">Loading project...</div>
-            </div>
-        )
+        return <LoadingState />
     }
 
     if (!project) {
