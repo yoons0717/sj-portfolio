@@ -7,7 +7,7 @@ export async function getCategories() {
     .from('categories')
     .select('*')
     .eq('is_active', true)
-    .order('sort_order', { ascending: true });
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching categories:', error);
@@ -22,7 +22,7 @@ export async function getAllCategories() {
   const { data, error } = await supabase
     .from('categories')
     .select('*')
-    .order('sort_order', { ascending: true });
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching all categories:', error);
@@ -96,24 +96,3 @@ export async function getCategory(id: string): Promise<Category | null> {
   return data;
 }
 
-// 카테고리 순서 업데이트
-export async function updateCategoryOrder(
-  updates: { id: string; sort_order: number }[],
-): Promise<boolean> {
-  const promises = updates.map(({ id, sort_order }) =>
-    supabase
-      .from('categories')
-      .update({ sort_order, updated_at: new Date().toISOString() })
-      .eq('id', id),
-  );
-
-  const results = await Promise.all(promises);
-  const hasError = results.some((result) => result.error);
-
-  if (hasError) {
-    console.error('Error updating category orders');
-    throw new Error('Failed to update category orders');
-  }
-
-  return true;
-}

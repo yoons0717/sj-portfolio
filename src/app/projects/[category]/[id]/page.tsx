@@ -164,11 +164,18 @@ The project was successfully deployed using a modern DevOps pipeline:
   author_id: 'user123',
 };
 
+interface ProjectDetailPageProps {
+  params: Promise<{ id: string; category: string }>;
+}
+
 export default function ProjectDetailPage({
-  projectId,
-}: {
-  projectId: string;
-}) {
+  params,
+}: ProjectDetailPageProps) {
+  const [projectId, setProjectId] = useState<string>('');
+
+  useEffect(() => {
+    params.then(({ id }) => setProjectId(id));
+  }, [params]);
   const [project, setProject] = useState<Project | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState('');

@@ -78,11 +78,7 @@ export default function CategoriesPage() {
     if (!validateForm()) return;
 
     try {
-      const maxSortOrder = Math.max(...categories.map((c) => c.sort_order), 0);
-      await createCategory({
-        ...formData,
-        sort_order: maxSortOrder + 1,
-      });
+      await createCategory(formData);
 
       setShowCreateForm(false);
       setFormData({
@@ -452,7 +448,6 @@ export default function CategoriesPage() {
                           </p>
                         )}
                         <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
-                          <span>Order: {category.sort_order}</span>
                           <span>Icon: {category.icon}</span>
                           <span
                             className={
