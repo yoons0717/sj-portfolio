@@ -11,6 +11,7 @@ import {
 import { Category, CategoryFormData } from '@/types';
 import LoadingState from '@/components/LoadingState';
 import { AdminLayout } from '@/components/layouts';
+import { Button, Input, Select, ColorPicker } from '@/components/ui';
 
 const iconOptions = [
   { value: 'presentation', label: '📊 Presentation' },
@@ -159,14 +160,13 @@ export default function CategoriesPage() {
       title="Category Management"
       subtitle="Manage your project categories"
       action={
-        <button
+        <Button
           onClick={() => setShowCreateForm(true)}
           disabled={showCreateForm}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#cb90cb] to-[#8b5a8b] disabled:from-gray-600 disabled:to-gray-700 text-white px-4 py-2 rounded-lg hover:from-[#d4a4d4] hover:to-[#9d6b9d] transition-all"
+          icon={<Plus size={18} />}
         >
-          <Plus size={18} />
           New Category
-        </button>
+        </Button>
       }
     >
         {/* Create Form */}
@@ -177,113 +177,72 @@ export default function CategoriesPage() {
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  Category Name *
-                </label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      name: e.target.value,
-                    }))
-                  }
-                  className={`w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 transition-colors outline-none ${
-                    errors.name
-                      ? 'border-red-500'
-                      : 'border-transparent focus:border-[#cb90cb]'
-                  }`}
-                  placeholder="Enter category name..."
-                />
-                {errors.name && (
-                  <p className="text-red-400 text-sm mt-1">{errors.name}</p>
-                )}
-              </div>
+              <Input
+                label="Category Name *"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }))
+                }
+                error={errors.name}
+                placeholder="Enter category name..."
+              />
 
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      description: e.target.value,
-                    }))
-                  }
-                  className="w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 border-transparent focus:border-[#cb90cb] transition-colors outline-none"
-                  placeholder="Brief description..."
-                />
-              </div>
+              <Input
+                label="Description"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
+                placeholder="Brief description..."
+              />
 
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  Color
-                </label>
-                <div className="flex gap-2">
-                  {colorOptions.map((color) => (
-                    <button
-                      key={color}
-                      type="button"
-                      onClick={() =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          color,
-                        }))
-                      }
-                      className={`w-8 h-8 rounded-full border-2 transition-all ${
-                        formData.color === color
-                          ? 'border-white scale-110'
-                          : 'border-gray-600'
-                      }`}
-                      style={{ backgroundColor: color }}
-                    />
-                  ))}
-                </div>
-              </div>
+              <ColorPicker
+                label="Color"
+                value={formData.color}
+                onChange={(color) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    color,
+                  }))
+                }
+                colors={colorOptions}
+              />
 
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  Icon
-                </label>
-                <select
-                  value={formData.icon}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      icon: e.target.value,
-                    }))
-                  }
-                  className="w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 border-transparent focus:border-[#cb90cb] transition-colors outline-none"
-                >
-                  {iconOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <Select
+                label="Icon"
+                value={formData.icon}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    icon: e.target.value,
+                  }))
+                }
+                options={iconOptions}
+                placeholder="Select an icon..."
+              />
             </div>
 
             <div className="flex justify-end gap-3 mt-6">
-              <button
+              <Button
                 onClick={cancelEdit}
-                className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+                variant="secondary"
+                icon={<X size={18} />}
               >
-                <X size={18} />
                 Cancel
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleCreate}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                variant="success"
+                icon={<Save size={18} />}
               >
-                <Save size={18} />
                 Create
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -303,115 +262,70 @@ export default function CategoriesPage() {
                   /* Edit Form */
                   <div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-2">
-                          Category Name *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.name}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              name: e.target.value,
-                            }))
-                          }
-                          className={`w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 transition-colors outline-none ${
-                            errors.name
-                              ? 'border-red-500'
-                              : 'border-transparent focus:border-[#cb90cb]'
-                          }`}
-                        />
-                        {errors.name && (
-                          <p className="text-red-400 text-sm mt-1">
-                            {errors.name}
-                          </p>
-                        )}
-                      </div>
+                      <Input
+                        label="Category Name *"
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            name: e.target.value,
+                          }))
+                        }
+                        error={errors.name}
+                      />
 
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-2">
-                          Description
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.description}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              description: e.target.value,
-                            }))
-                          }
-                          className="w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 border-transparent focus:border-[#cb90cb] transition-colors outline-none"
-                        />
-                      </div>
+                      <Input
+                        label="Description"
+                        value={formData.description}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            description: e.target.value,
+                          }))
+                        }
+                      />
 
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-2">
-                          Color
-                        </label>
-                        <div className="flex gap-2">
-                          {colorOptions.map((color) => (
-                            <button
-                              key={color}
-                              type="button"
-                              onClick={() =>
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  color,
-                                }))
-                              }
-                              className={`w-8 h-8 rounded-full border-2 transition-all ${
-                                formData.color === color
-                                  ? 'border-white scale-110'
-                                  : 'border-gray-600'
-                              }`}
-                              style={{
-                                backgroundColor: color,
-                              }}
-                            />
-                          ))}
-                        </div>
-                      </div>
+                      <ColorPicker
+                        label="Color"
+                        value={formData.color}
+                        onChange={(color) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            color,
+                          }))
+                        }
+                        colors={colorOptions}
+                      />
 
-                      <div>
-                        <label className="block text-white text-sm font-medium mb-2">
-                          Icon
-                        </label>
-                        <select
-                          value={formData.icon}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              icon: e.target.value,
-                            }))
-                          }
-                          className="w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 border-transparent focus:border-[#cb90cb] transition-colors outline-none"
-                        >
-                          {iconOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
+                      <Select
+                        label="Icon"
+                        value={formData.icon}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            icon: e.target.value,
+                          }))
+                        }
+                        options={iconOptions}
+                        placeholder="Select an icon..."
+                      />
                     </div>
 
                     <div className="flex justify-end gap-3">
-                      <button
+                      <Button
                         onClick={cancelEdit}
-                        className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+                        variant="secondary"
+                        icon={<X size={18} />}
                       >
-                        <X size={18} />
                         Cancel
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         onClick={() => handleUpdate(category.id)}
-                        className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                        variant="success"
+                        icon={<Save size={18} />}
                       >
-                        <Save size={18} />
                         Save Changes
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ) : (
@@ -450,23 +364,25 @@ export default function CategoriesPage() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <button
+                      <Button
                         onClick={() => startEdit(category)}
                         disabled={editingId !== null}
-                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-3 py-2 rounded-lg transition-colors"
+                        variant="secondary"
+                        size="sm"
+                        icon={<Edit size={16} />}
                       >
-                        <Edit size={16} />
                         Edit
-                      </button>
+                      </Button>
 
-                      <button
+                      <Button
                         onClick={() => handleDelete(category.id, category.name)}
                         disabled={editingId !== null}
-                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white px-3 py-2 rounded-lg transition-colors"
+                        variant="danger"
+                        size="sm"
+                        icon={<Trash2 size={16} />}
                       >
-                        <Trash2 size={16} />
                         Delete
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )}

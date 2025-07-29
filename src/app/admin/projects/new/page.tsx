@@ -9,6 +9,7 @@ import { CategorySimple } from '@/types';
 import { getCategories } from '@/lib/api/categories';
 import FileUpload from '@/components/FileUpload';
 import { AdminLayout } from '@/components/layouts';
+import { Button, Input, Select } from '@/components/ui';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -200,21 +201,20 @@ const techStack = {
       subtitle="Add a new project to your portfolio"
       action={
         <div className="flex items-center gap-3">
-          <button
+          <Button
             onClick={() => router.push('/admin/projects')}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            variant="ghost"
+            icon={<ArrowLeft size={18} />}
           >
-            <ArrowLeft size={18} />
             Back to Projects
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => setPreviewMode(!previewMode)}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+            variant="secondary"
+            icon={<Eye size={18} />}
           >
-            <Eye size={18} />
             {previewMode ? 'Edit Mode' : 'Preview'}
-          </button>
+          </Button>
         </div>
       }
     >
@@ -228,11 +228,8 @@ const techStack = {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Project Title */}
               <div className="lg:col-span-2">
-                <label className="block text-white text-sm font-medium mb-2">
-                  Project Title *
-                </label>
-                <input
-                  type="text"
+                <Input
+                  label="Project Title *"
                   value={formData.title}
                   onChange={(e) =>
                     setFormData((prev) => ({
@@ -240,25 +237,16 @@ const techStack = {
                       title: e.target.value,
                     }))
                   }
-                  className={`w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 transition-colors outline-none ${
-                    errors.title
-                      ? 'border-red-500'
-                      : 'border-transparent focus:border-[#cb90cb]'
-                  }`}
+                  error={errors.title}
                   placeholder="Enter project title..."
                   disabled={previewMode}
                 />
-                {errors.title && (
-                  <p className="text-red-400 text-sm mt-1">{errors.title}</p>
-                )}
               </div>
 
               {/* Category */}
               <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  Category *
-                </label>
-                <select
+                <Select
+                  label="Category *"
                   value={formData.category_id}
                   onChange={(e) =>
                     setFormData((prev) => ({
@@ -266,25 +254,11 @@ const techStack = {
                       category_id: e.target.value,
                     }))
                   }
-                  className={`w-full bg-[#472447] text-white px-4 py-3 rounded-lg border-2 transition-colors outline-none ${
-                    errors.category_id
-                      ? 'border-red-500'
-                      : 'border-transparent focus:border-[#cb90cb]'
-                  }`}
+                  options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
+                  error={errors.category_id}
+                  placeholder="Select a category..."
                   disabled={previewMode}
-                >
-                  <option value="">Select a category...</option>
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.category_id && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.category_id}
-                  </p>
-                )}
+                />
 
                 {/* Category Preview */}
                 {formData.category_id && (
@@ -428,25 +402,25 @@ const techStack = {
 
           {/* Action Buttons */}
           <div className="flex justify-end gap-4 pt-6 border-t border-[#472447]">
-            <button
-              type="button"
+            <Button
               onClick={handleCancel}
               disabled={isLoading}
-              className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg transition-colors"
+              variant="secondary"
+              size="lg"
+              icon={<X size={18} />}
             >
-              <X size={18} />
               Cancel
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               onClick={handleSubmit}
               disabled={isLoading || previewMode}
-              className="flex items-center gap-2 bg-gradient-to-r from-[#cb90cb] to-[#8b5a8b] hover:from-[#d4a4d4] hover:to-[#9d6b9d] disabled:from-[#8b5a8b] disabled:to-[#6d4a6d] text-white px-6 py-3 rounded-lg transition-all shadow-lg"
+              size="lg"
+              loading={isLoading}
+              icon={!isLoading ? <Save size={18} /> : undefined}
             >
-              <Save size={18} />
               {isLoading ? 'Creating...' : 'Create Project'}
-            </button>
+            </Button>
           </div>
         </div>
     </AdminLayout>
