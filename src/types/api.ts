@@ -4,13 +4,13 @@
 
 // 🔸 단일 데이터 응답
 export type ApiResponse<T> = {
-    data: T | null
-    error: string | null
-}
+  data: T | null;
+  error: string | null;
+};
 
 // 🔸 리스트 데이터 응답
 export type ApiListResponse<T> = {
-    data: T[] | null
-    error: string | null
-    count?: number
-}
+  data: T[] | null;
+  error: string | null;
+  count?: number;
+};
