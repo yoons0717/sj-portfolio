@@ -6,14 +6,13 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import LoadingState from '@/components/LoadingState'
 import ErrorState from '@/components/ErrorState'
-import { getCategoriesWithCount } from '@/lib/api/projects'
+import { getCategories } from '@/lib/api/categories'
 import HeroBanner from './home/components/HeroBanner'
 import ProfileSection from './home/components/ProfileSection'
 import CategoriesSection from './home/components/CategoriesSection'
-import { Category, Profile } from '@/types/portfolio'
+import { CategoryDisplay, PortfolioProfile } from '@/types'
 
-// 프로필 정보
-const profileData: Profile = {
+const profileData: PortfolioProfile = {
     name: 'Sophia Carter',
     title: 'Multimedia Artist & Technologist',
     description:
@@ -22,7 +21,7 @@ const profileData: Profile = {
 }
 
 export default function HomePage() {
-    const [categories, setCategories] = useState<Category[]>([])
+    const [categories, setCategories] = useState<CategoryDisplay[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const router = useRouter()
@@ -31,34 +30,52 @@ export default function HomePage() {
         async function fetchData() {
             try {
                 setIsLoading(true)
-                const categoriesData = await getCategoriesWithCount()
+                const categoriesData = await getCategories()
 
                 if (categoriesData) {
-                    setCategories(categoriesData)
+                    // Convert API data to frontend format
+                    const formattedCategories = categoriesData.map(
+                        (category) => ({
+                            id: category.id,
+                            name: category.name,
+                            color: category.color,
+                            icon: category.icon,
+                            thumbnail: `https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop`,
+                        })
+                    )
+                    setCategories(formattedCategories)
                 } else {
                     // Fallback to mock data if no Supabase data
                     setCategories([
                         {
+                            id: '1',
                             name: 'Development',
-                            count: 8,
+                            color: '#3B82F6',
+                            icon: 'code',
                             thumbnail:
                                 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop',
                         },
                         {
+                            id: '2',
                             name: 'Design',
-                            count: 12,
+                            color: '#EC4899',
+                            icon: 'palette',
                             thumbnail:
                                 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=400&fit=crop',
                         },
                         {
+                            id: '3',
                             name: 'VR/AR Production',
-                            count: 6,
+                            color: '#10B981',
+                            icon: 'vr',
                             thumbnail:
                                 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop',
                         },
                         {
+                            id: '4',
                             name: 'Proposals',
-                            count: 4,
+                            color: '#F59E0B',
+                            icon: 'document',
                             thumbnail:
                                 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
                         },

@@ -1,9 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import { Database } from '@/types/database'
-
-type Category = Database['public']['Tables']['categories']['Row']
-type CategoryInsert = Database['public']['Tables']['categories']['Insert']
-type CategoryUpdate = Database['public']['Tables']['categories']['Update']
+import { Category, CategoryInsert, CategoryUpdate } from '@/types'
 
 // 활성 카테고리만 가져오기 (사용자용)
 export async function getCategories() {
@@ -69,18 +65,54 @@ export async function updateCategory(id: string, category: CategoryUpdate) {
     return data
 }
 
-// 카테고리 삭제
-export async function deleteCategory(id: string) {
-    const { data, error } = await supabase
+// 카테고리 삭제 (soft delete)
+export async function deleteCategory(id: string): Promise<boolean> {
+    const { error } = await supabase
         .from('categories')
-        .update({ is_active: false })
+        .update({ is_active: false, updated_at: new Date().toISOString() })
         .eq('id', id)
-        .select()
 
     if (error) {
         console.error('Error deleting category:', error)
         throw error
     }
 
+    return true
+}
+
+// 특정 카테고리 가져오기
+export async function getCategory(id: string): Promise<Category | null> {
+    const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+    if (error) {
+        console.error('Error fetching category:', error)
+        return null
+    }
+
     return data
 }
+
+// 카테고리 순서 업데이트
+export async function updateCategoryOrder(updates: { id: string; sort_order: number }[]): Promise<boolean> {
+    const promises = updates.map(({ id, sort_order }) =>
+        supabase
+            .from('categories')
+            .update({ sort_order, updated_at: new Date().toISOString() })
+            .eq('id', id)
+    )
+
+    const results = await Promise.all(promises)
+    const hasError = results.some(result => result.error)
+
+    if (hasError) {
+        console.error('Error updating category orders')
+        throw new Error('Failed to update category orders')
+    }
+
+    return true
+}
+

@@ -1,7 +1,7 @@
-import { Profile } from '@/types/portfolio'
+import { PortfolioProfile } from '@/types'
 
 interface ProfileSectionProps {
-    profile: Profile
+    profile: PortfolioProfile
 }
 
 export default function ProfileSection({ profile }: ProfileSectionProps) {

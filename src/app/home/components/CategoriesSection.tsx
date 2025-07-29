@@ -1,8 +1,8 @@
 import CategoryCard from './CategoryCard'
-import { Category } from '@/types/portfolio'
+import { CategoryDisplay } from '@/types'
 
 interface CategoriesSectionProps {
-    categories: Category[]
+    categories: CategoryDisplay[]
     onCategoryClick: (categoryName: string) => void
 }
 

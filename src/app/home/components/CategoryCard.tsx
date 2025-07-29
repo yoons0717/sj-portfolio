@@ -1,7 +1,7 @@
-import { Category } from '@/types/portfolio'
+import { CategoryDisplay } from '@/types'
 
 interface CategoryCardProps {
-    category: Category
+    category: CategoryDisplay
     index: number
     onClick: (categoryName: string) => void
 }
@@ -28,10 +28,7 @@ export default function CategoryCard({ category, index, onClick }: CategoryCardP
                     <h3 className="text-white text-xl font-bold leading-tight mb-2 group-hover:text-[#c893c8] transition-colors">
                         {category.name}
                     </h3>
-                    <div className="flex items-center justify-between">
-                        <span className="text-[#c893c8] text-sm font-medium">
-                            {category.count} projects
-                        </span>
+                    <div className="flex items-center justify-end">
                         <div className="w-8 h-8 bg-[#c893c8] rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
                             <svg
                                 className="w-4 h-4 text-white group-hover:text-[#c893c8] transition-colors"

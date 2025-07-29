@@ -1,19 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import { Database } from '@/types/database'
-
-type Project = Database['public']['Tables']['projects']['Row']
-type ProjectInsert = Database['public']['Tables']['projects']['Insert']
-type ProjectUpdate = Database['public']['Tables']['projects']['Update']
-
-// 프로젝트와 카테고리 정보를 함께 가져오는 타입
-export interface ProjectWithCategory extends Omit<Project, 'category_id'> {
-    category: {
-        id: string
-        name: string
-        color: string
-        icon: string
-    } | null
-}
+import { Project, ProjectInsert, ProjectUpdate, ProjectWithCategory } from '@/types'
 
 // 모든 프로젝트 가져오기 (카테고리 정보 포함)
 export async function getProjects(): Promise<ProjectWithCategory[] | null> {
@@ -133,35 +119,29 @@ export async function deleteProject(id: string) {
     return true
 }
 
-// 메인 페이지용: 카테고리별 프로젝트 개수
-export async function getCategoriesWithCount() {
+// 카테고리별 프로젝트 가져오기
+export async function getProjectsByCategory(categoryId: string): Promise<ProjectWithCategory[] | null> {
     const { data, error } = await supabase
-        .from('categories')
+        .from('projects')
         .select(
             `
-      id,
-      name,
-      color,
-      icon,
-      sort_order,
-      projects:projects(count)
+      *,
+      category:categories (
+        id,
+        name,
+        color,
+        icon
+      )
     `
         )
-        .eq('is_active', true)
-        .order('sort_order', { ascending: true })
+        .eq('category_id', categoryId)
+        .order('created_at', { ascending: false })
 
     if (error) {
-        console.error('Error fetching categories with count:', error)
+        console.error('Error fetching projects by category:', error)
         return null
     }
 
-    return data.map((category) => ({
-        id: category.id,
-        name: category.name,
-        count: category.projects?.[0]?.count || 0,
-        color: category.color,
-        icon: category.icon,
-        // 기본 썸네일 (나중에 카테고리별로 설정 가능)
-        thumbnail: `https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop`,
-    }))
+    return data as ProjectWithCategory[]
 }
+

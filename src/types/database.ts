@@ -1,3 +1,5 @@
+export type UserRole = 'user' | 'admin'
+
 export interface Database {
     public: {
         Tables: {
@@ -41,7 +43,7 @@ export interface Database {
                     id: string
                     title: string
                     content: string | null
-                    category_id: string | null // 변경됨: category → category_id
+                    category_id: string | null
                     thumbnail_url: string | null
                     created_at: string
                     updated_at: string
@@ -51,17 +53,17 @@ export interface Database {
                     id?: string
                     title: string
                     content?: string | null
-                    category_id?: string | null // 변경됨: category → category_id
+                    category_id?: string | null
                     thumbnail_url?: string | null
                     created_at?: string
                     updated_at?: string
-                    author_id: string
+                    author_id?: string
                 }
                 Update: {
                     id?: string
                     title?: string
                     content?: string | null
-                    category_id?: string | null // 변경됨: category → category_id
+                    category_id?: string | null
                     thumbnail_url?: string | null
                     created_at?: string
                     updated_at?: string
@@ -74,7 +76,7 @@ export interface Database {
                     email: string
                     name: string | null
                     avatar_url: string | null
-                    role: 'user' | 'admin'
+                    role: UserRole
                     created_at: string
                     updated_at: string
                 }
@@ -83,7 +85,7 @@ export interface Database {
                     email: string
                     name?: string | null
                     avatar_url?: string | null
-                    role?: 'user' | 'admin'
+                    role?: UserRole
                     created_at?: string
                     updated_at?: string
                 }
@@ -92,7 +94,7 @@ export interface Database {
                     email?: string
                     name?: string | null
                     avatar_url?: string | null
-                    role?: 'user' | 'admin'
+                    role?: UserRole
                     created_at?: string
                     updated_at?: string
                 }
