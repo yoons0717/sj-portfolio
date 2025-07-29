@@ -10,6 +10,7 @@ import {
 } from '@/lib/api/categories';
 import { Category, CategoryFormData } from '@/types';
 import LoadingState from '@/components/LoadingState';
+import { AdminLayout } from '@/components/layouts';
 
 const iconOptions = [
   { value: 'presentation', label: '📊 Presentation' },
@@ -154,34 +155,20 @@ export default function CategoriesPage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-[#231023]"
-      style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
+    <AdminLayout
+      title="Category Management"
+      subtitle="Manage your project categories"
+      action={
+        <button
+          onClick={() => setShowCreateForm(true)}
+          disabled={showCreateForm}
+          className="flex items-center gap-2 bg-gradient-to-r from-[#cb90cb] to-[#8b5a8b] disabled:from-gray-600 disabled:to-gray-700 text-white px-4 py-2 rounded-lg hover:from-[#d4a4d4] hover:to-[#9d6b9d] transition-all"
+        >
+          <Plus size={18} />
+          New Category
+        </button>
+      }
     >
-      {/* Header */}
-      <header className="bg-[#2a1329] border-b border-[#472447] px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-white text-2xl font-bold">
-              Category Management
-            </h1>
-            <p className="text-gray-400 text-sm mt-1">
-              Manage your project categories
-            </p>
-          </div>
-
-          <button
-            onClick={() => setShowCreateForm(true)}
-            disabled={showCreateForm}
-            className="flex items-center gap-2 bg-gradient-to-r from-[#cb90cb] to-[#8b5a8b] disabled:from-gray-600 disabled:to-gray-700 text-white px-4 py-2 rounded-lg hover:from-[#d4a4d4] hover:to-[#9d6b9d] transition-all"
-          >
-            <Plus size={18} />
-            New Category
-          </button>
-        </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Create Form */}
         {showCreateForm && (
           <div className="bg-[#2a1329] rounded-xl p-6 shadow-xl mb-8">
@@ -487,7 +474,6 @@ export default function CategoriesPage() {
             ))}
           </div>
         </div>
-      </div>
-    </div>
+    </AdminLayout>
   );
 }

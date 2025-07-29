@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
+import { PageLayout } from '@/components/layouts';
 import { getCategories } from '@/lib/api/categories';
 import HeroBanner from './home/components/HeroBanner';
 import ProfileSection from './home/components/ProfileSection';
@@ -104,14 +103,9 @@ export default function HomePage() {
   }
 
   return (
-    <div
-      className="relative flex min-h-screen flex-col bg-[#221122]"
-      style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
-    >
-      <Header />
-
+    <PageLayout>
       <HeroBanner />
-
+      
       <div className="px-4 md:px-20 flex flex-1 justify-center py-12">
         <div className="flex flex-col max-w-[1200px] flex-1">
           <ProfileSection profile={profileData} />
@@ -121,8 +115,6 @@ export default function HomePage() {
           />
         </div>
       </div>
-
-      <Footer />
-    </div>
+    </PageLayout>
   );
 }

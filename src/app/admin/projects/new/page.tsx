@@ -8,6 +8,7 @@ import { createProject } from '@/lib/api/projects';
 import { CategorySimple } from '@/types';
 import { getCategories } from '@/lib/api/categories';
 import FileUpload from '@/components/FileUpload';
+import { AdminLayout } from '@/components/layouts';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -194,46 +195,29 @@ const techStack = {
   };
 
   return (
-    <div
-      className="min-h-screen bg-[#231023]"
-      style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
-    >
-      {/* Header */}
-      <header className="bg-[#2a1329] border-b border-[#472447] px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => router.push('/admin/projects')}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-            >
-              <ArrowLeft size={20} />
-              Back to Projects
-            </button>
-            <div className="w-px h-6 bg-[#472447]"></div>
-            <div>
-              <h1 className="text-white text-2xl font-bold">
-                Create New Project
-              </h1>
-              <p className="text-gray-400 text-sm mt-1">
-                Add a new project to your portfolio
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setPreviewMode(!previewMode)}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Eye size={18} />
-              {previewMode ? 'Edit Mode' : 'Preview'}
-            </button>
-          </div>
+    <AdminLayout
+      title="Create New Project"
+      subtitle="Add a new project to your portfolio"
+      action={
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => router.push('/admin/projects')}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Projects
+          </button>
+          <button
+            type="button"
+            onClick={() => setPreviewMode(!previewMode)}
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            <Eye size={18} />
+            {previewMode ? 'Edit Mode' : 'Preview'}
+          </button>
         </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      }
+    >
         <div className="space-y-8">
           {/* Basic Information */}
           <div className="bg-[#2a1329] rounded-xl p-6 shadow-xl">
@@ -465,7 +449,6 @@ const techStack = {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+    </AdminLayout>
   );
 }
