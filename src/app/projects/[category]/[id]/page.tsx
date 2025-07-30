@@ -274,10 +274,10 @@ export default function ProjectDetailPage({
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#231023] flex items-center justify-center">
+      <div className="min-h-screen bg-surface-variant flex items-center justify-center">
         <div className="text-center">
           <div className="text-white text-xl mb-2">Project not found</div>
-          <div className="text-[#cb90cb] text-sm">
+          <div className="text-accent-variant text-sm">
             The requested project could not be found.
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function ProjectDetailPage({
 
   return (
     <div
-      className="relative flex min-h-screen flex-col bg-[#231023]"
+      className="relative flex min-h-screen flex-col bg-surface-variant"
       style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
     >
       <Header />
@@ -342,14 +342,14 @@ export default function ProjectDetailPage({
           <div className="p-4">
             {isEditing ? (
               <div className="space-y-2">
-                <label className="block text-[#cb90cb] text-sm font-medium">
+                <label className="block text-accent-variant text-sm font-medium">
                   Project Title
                 </label>
                 <input
                   type="text"
                   value={editedTitle}
                   onChange={(e) => setEditedTitle(e.target.value)}
-                  className="w-full bg-[#492249] text-white text-[28px] md:text-[32px] font-bold leading-tight px-4 py-3 rounded-lg border-2 border-transparent focus:border-[#cb90cb] outline-none"
+                  className="w-full bg-surface-elevated text-white text-[28px] md:text-[32px] font-bold leading-tight px-4 py-3 rounded-lg border-2 border-transparent focus:border-accent-variant outline-none"
                   placeholder="Enter project title..."
                 />
               </div>
@@ -365,10 +365,10 @@ export default function ProjectDetailPage({
             {isEditing ? (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label className="block text-[#cb90cb] text-sm font-medium">
+                  <label className="block text-accent-variant text-sm font-medium">
                     Project Content (Markdown)
                   </label>
-                  <div className="text-[#cb90cb] text-xs">
+                  <div className="text-accent-variant text-xs">
                     ✨ Rich markdown editor with live preview
                   </div>
                 </div>
@@ -397,11 +397,11 @@ export default function ProjectDetailPage({
                   />
                 </div>
 
-                <div className="bg-[#492249] rounded-lg p-4">
+                <div className="bg-surface-elevated rounded-lg p-4">
                   <h4 className="text-white text-sm font-semibold mb-2">
                     💡 Markdown Tips:
                   </h4>
-                  <div className="text-[#cb90cb] text-xs space-y-1">
+                  <div className="text-accent-variant text-xs space-y-1">
                     <p>• **Bold text** and *italic text*</p>
                     <p>• ## Headings and ### Subheadings</p>
                     <p>• ![Image description](image-url)</p>
@@ -429,14 +429,14 @@ export default function ProjectDetailPage({
 
           {/* Meta Information */}
           {!isEditing && (
-            <div className="border-t border-[#683168] mt-8 pt-6 px-4">
+            <div className="border-t border-border-variant mt-8 pt-6 px-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="space-y-1">
-                  <span className="text-[#cb90cb] font-medium">Category</span>
+                  <span className="text-accent-variant font-medium">Category</span>
                   <div className="text-white">{project.category}</div>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[#cb90cb] font-medium">Created</span>
+                  <span className="text-accent-variant font-medium">Created</span>
                   <div className="text-white">
                     {new Date(project.created_at).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -446,7 +446,7 @@ export default function ProjectDetailPage({
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[#cb90cb] font-medium">
+                  <span className="text-accent-variant font-medium">
                     Last Updated
                   </span>
                   <div className="text-white">

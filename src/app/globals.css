@@ -9,33 +9,46 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Text Colors */
+  /* Text Colors - Gaming Theme */
   --color-primary: #ffffff;
-  --color-secondary: #d1c7d1;
-  --color-muted: #9a859a;
-  --color-inverse: #221122;
+  --color-secondary: #e0e0e0;
+  --color-muted: #b0b0b0;
+  --color-inverse: #0a0a0a;
 
-  /* Accent Colors */
-  --color-accent: #c893c8;
-  --color-accent-light: #d4a4d4;
-  --color-accent-dark: #5a305a;
+  /* Accent Colors - Neon Green/Lime Primary */
+  --color-accent: #39ff14;
+  --color-accent-light: #66ff44;
+  --color-accent-dark: #2dd40f;
+  --color-accent-variant: #7fff00;
+  --color-accent-pink: #ff1493;
+  --color-accent-medium: #32cd32;
 
-  /* Background Colors */
-  --color-surface: #221122;
-  --color-surface-secondary: #231023;
-  --color-surface-tertiary: #23101d;
-  --color-card: #2a1329;
-  --color-input: #472447;
+  /* Background Colors - Dark Gaming Theme */
+  --color-surface: #0a0a0a;
+  --color-surface-variant: #1a1a1a;
+  --color-surface-tertiary: #2a2a2a;
+  --color-card: #1e1e1e;
+  --color-input: #333333;
+  --color-surface-elevated: #404040;
 
-  /* Border Colors */
-  --color-border: #472447;
-  --color-border-light: #d4a4d4;
+  /* Border Colors - Gaming Accents */
+  --color-border: #333333;
+  --color-border-light: #66ff44;
+  --color-border-accent: #39ff14;
+  --color-border-variant: #7f39fb;
 
   /* Status Colors */
   --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-warning: #ffa500;
+  --color-error: #ff4444;
+  --color-info: #00bfff;
+
+  /* Gaming Specific Colors */
+  --color-neon-purple: #7f39fb;
+  --color-neon-blue: #0080ff;
+  --color-neon-yellow: #ffff00;
+  --color-pink: #ff1493;
+  --color-pink-light: #ff69b4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,3 +63,47 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 
+=== 게이밍 뉴스 인터페이스 색상 팔레트 ===
+직접 색상 주입 시 사용할 표준 색상들 (예: bg-[#39ff14])
+
+Neon Green Theme (Primary):
+- Primary: #39ff14 (메인 네온 그린)
+- Light: #66ff44 (밝은 그린, 호버)
+- Dark: #2dd40f (진한 그린)
+- Variant: #7fff00 (라임 그린)
+- Medium: #32cd32 (중간 그린)
+
+Gaming Accents:
+- Neon Purple: #7f39fb (보조 액센트)
+- Neon Blue: #0080ff (정보, 링크)
+- Neon Yellow: #ffff00 (경고, 하이라이트)
+- Pink: #ff1493 (특별 강조)
+- Pink Light: #ff69b4 (핑크 변형)
+
+Background (Dark Gaming):
+- Surface: #0a0a0a (메인 배경)
+- Surface Variant: #1a1a1a (보조 배경)
+- Surface Tertiary: #2a2a2a (3차 배경)
+- Card: #1e1e1e (카드, 모달)
+- Input: #333333 (입력 필드)
+- Elevated: #404040 (고도 배경)
+
+Text:
+- Primary: #ffffff (기본 텍스트)
+- Secondary: #e0e0e0 (보조 텍스트)
+- Muted: #b0b0b0 (힌트, 비활성)
+
+Border:
+- Primary: #333333 (기본 테두리)
+- Light: #66ff44 (밝은 테두리)
+- Accent: #39ff14 (네온 그린 테두리)
+- Variant: #7f39fb (퍼플 테두리)
+
+Status:
+- Success: #22c55e
+- Warning: #ffa500
+- Error: #ff4444
+- Info: #00bfff
+*/

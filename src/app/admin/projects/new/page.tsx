@@ -220,7 +220,7 @@ const techStack = {
     >
         <div className="space-y-8">
           {/* Basic Information */}
-          <div className="bg-[#2a1329] rounded-xl p-6 shadow-xl">
+          <div className="bg-card rounded-xl p-6 shadow-xl">
             <h2 className="text-white text-xl font-semibold mb-6">
               Basic Information
             </h2>
@@ -308,9 +308,9 @@ const techStack = {
                   />
                 ) : (
                   // 프리뷰 모드에서는 읽기 전용으로 표시
-                  <div className="bg-[#472447] rounded-lg p-4">
+                  <div className="bg-input rounded-lg p-4">
                     {formData.thumbnail_url ? (
-                      <div className="text-[#c893c8] text-sm">
+                      <div className="text-accent text-sm">
                         ✅ Thumbnail uploaded
                       </div>
                     ) : (
@@ -330,18 +330,18 @@ const techStack = {
           </div>
 
           {/* Content Editor */}
-          <div className="bg-[#2a1329] rounded-xl p-6 shadow-xl">
+          <div className="bg-card rounded-xl p-6 shadow-xl">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-white text-xl font-semibold">
                 Project Content
               </h2>
-              <div className="text-[#cb90cb] text-sm">
+              <div className="text-accent-variant text-sm">
                 ✨ Rich markdown editor with live preview
               </div>
             </div>
 
             {previewMode ? (
-              <div className="prose prose-invert prose-lg max-w-none bg-[#472447] rounded-lg p-6">
+              <div className="prose prose-invert prose-lg max-w-none bg-input rounded-lg p-6">
                 <div data-color-mode="dark">
                   <MarkdownPreview
                     source={formData.content}
@@ -383,11 +383,11 @@ const techStack = {
                 )}
 
                 {/* Markdown Tips */}
-                <div className="bg-[#472447] rounded-lg p-4 mt-4">
+                <div className="bg-input rounded-lg p-4 mt-4">
                   <h4 className="text-white text-sm font-semibold mb-2">
                     💡 Markdown Tips:
                   </h4>
-                  <div className="text-[#cb90cb] text-xs space-y-1">
+                  <div className="text-accent-variant text-xs space-y-1">
                     <p>• **Bold text** and *italic text*</p>
                     <p>• ## Headings and ### Subheadings</p>
                     <p>• ![Image description](image-url)</p>
@@ -401,7 +401,7 @@ const techStack = {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end gap-4 pt-6 border-t border-[#472447]">
+          <div className="flex justify-end gap-4 pt-6 border-t border-input">
             <Button
               onClick={handleCancel}
               disabled={isLoading}

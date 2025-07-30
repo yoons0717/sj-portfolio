@@ -14,7 +14,7 @@ export default function AdminLayout({
   action,
 }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-surface-secondary font-sans">
+    <div className="min-h-screen bg-surface-variant font-sans">
       {/* Admin Header */}
       <header className="bg-card border-b border-border px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">

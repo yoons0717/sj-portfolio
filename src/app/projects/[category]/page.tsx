@@ -104,7 +104,7 @@ export default function CategoryProjectsPage() {
 
   return (
     <div
-      className="relative flex min-h-screen flex-col bg-[#23101d]"
+      className="relative flex min-h-screen flex-col bg-surface-tertiary"
       style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
     >
       <Header />
@@ -118,7 +118,7 @@ export default function CategoryProjectsPage() {
               <h1 className="text-white tracking-light text-[32px] font-bold leading-tight">
                 Projects
               </h1>
-              <p className="text-[#cb90b7] text-sm font-normal leading-normal">
+              <p className="text-accent-pink text-sm font-normal leading-normal">
                 Explore a curated collection of my work, showcasing my skills
                 and creativity across various projects.
               </p>
@@ -127,15 +127,15 @@ export default function CategoryProjectsPage() {
 
           {/* Category Tabs */}
           <div className="pb-3">
-            <div className="flex border-b border-[#683156] px-4 gap-8 overflow-x-auto">
+            <div className="flex border-b border-border-accent px-4 gap-8 overflow-x-auto">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => handleCategoryClick(category)}
                   className={`flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 whitespace-nowrap transition-colors ${
                     currentCategory === category
-                      ? 'border-b-[#f43db7] text-white'
-                      : 'border-b-transparent text-[#cb90b7] hover:text-white'
+                      ? 'border-b-accent-pink text-white'
+                      : 'border-b-transparent text-accent-pink hover:text-white'
                   }`}
                 >
                   <p className="text-sm font-bold leading-normal tracking-[0.015em]">
@@ -161,10 +161,10 @@ export default function CategoryProjectsPage() {
                   }}
                 />
                 <div className="space-y-2">
-                  <h3 className="text-white text-base font-medium leading-normal group-hover:text-[#cb90b7] transition-colors">
+                  <h3 className="text-white text-base font-medium leading-normal group-hover:text-accent-pink transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-[#cb90b7] text-sm font-normal leading-normal line-clamp-2">
+                  <p className="text-accent-pink text-sm font-normal leading-normal line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex justify-between items-center text-xs text-gray-400">
@@ -180,7 +180,7 @@ export default function CategoryProjectsPage() {
 
           {/* Load More Button */}
           <div className="flex justify-center p-4">
-            <button className="bg-gradient-to-r from-[#f43db7] to-[#cb90b7] text-white px-8 py-3 rounded-full font-medium hover:from-[#f550c4] hover:to-[#d4a4d4] transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button className="bg-gradient-to-r from-pink to-accent-pink text-white px-8 py-3 rounded-full font-medium hover:from-pink-light hover:to-accent-light transition-all duration-300 shadow-lg hover:shadow-xl">
               Load More Projects
             </button>
           </div>

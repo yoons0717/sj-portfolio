@@ -171,7 +171,7 @@ export default function CategoriesPage() {
     >
         {/* Create Form */}
         {showCreateForm && (
-          <div className="bg-[#2a1329] rounded-xl p-6 shadow-xl mb-8">
+          <div className="bg-card rounded-xl p-6 shadow-xl mb-8">
             <h2 className="text-white text-xl font-semibold mb-6">
               Create New Category
             </h2>
@@ -248,14 +248,14 @@ export default function CategoriesPage() {
         )}
 
         {/* Categories List */}
-        <div className="bg-[#2a1329] rounded-xl shadow-xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-[#472447]">
+        <div className="bg-card rounded-xl shadow-xl overflow-hidden">
+          <div className="px-6 py-4 border-b border-input">
             <h2 className="text-white text-xl font-semibold">
               Categories ({categories.length})
             </h2>
           </div>
 
-          <div className="divide-y divide-[#472447]">
+          <div className="divide-y divide-input">
             {categories.map((category) => (
               <div key={category.id} className="p-6">
                 {editingId === category.id ? (

@@ -66,7 +66,7 @@ export default function HeroBanner() {
                   {slide.subtitle}
                 </p>
                 <div className="mt-8">
-                  <button className="bg-gradient-to-r from-[#c893c8] to-[#8b5a8b] text-white px-8 py-4 rounded-full font-medium text-lg hover:from-[#d4a4d4] hover:to-[#9d6b9d] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
+                  <button className="bg-gradient-to-r from-accent to-accent-dark text-white px-8 py-4 rounded-full font-medium text-lg hover:from-accent-light hover:to-accent-medium transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
                     Explore Projects
                   </button>
                 </div>

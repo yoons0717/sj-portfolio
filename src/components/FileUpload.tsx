@@ -120,14 +120,14 @@ export default function FileUpload({
       {!preview ? (
         <div
           onClick={triggerFileSelect}
-          className="border-2 border-dashed border-[#c893c8]/30 rounded-lg p-8 text-center cursor-pointer hover:border-[#c893c8]/50 transition-colors bg-[#2a1329]/20"
+          className="border-2 border-dashed border-accent/30 rounded-lg p-8 text-center cursor-pointer hover:border-accent/50 transition-colors bg-card/20"
         >
           <div className="flex flex-col items-center space-y-3">
-            <div className="w-12 h-12 bg-[#c893c8]/20 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
               {isUploading ? (
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#c893c8]"></div>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
               ) : (
-                <Upload className="w-6 h-6 text-[#c893c8]" />
+                <Upload className="w-6 h-6 text-accent" />
               )}
             </div>
             <div>
@@ -143,7 +143,7 @@ export default function FileUpload({
       ) : (
         <div className="relative">
           {/* Preview */}
-          <div className="relative rounded-lg overflow-hidden bg-[#2a1329]/20 border border-[#c893c8]/20">
+          <div className="relative rounded-lg overflow-hidden bg-card/20 border border-accent/20">
             <Image
               src={preview}
               alt="Thumbnail preview"
@@ -161,7 +161,7 @@ export default function FileUpload({
               <button
                 onClick={triggerFileSelect}
                 disabled={isUploading}
-                className="bg-[#c893c8] text-white px-3 py-1.5 rounded-md text-sm hover:bg-[#d4a4d4] transition-colors flex items-center space-x-1"
+                className="bg-accent text-white px-3 py-1.5 rounded-md text-sm hover:bg-accent-light transition-colors flex items-center space-x-1"
               >
                 <ImageIcon className="w-4 h-4" />
                 <span>Change</span>

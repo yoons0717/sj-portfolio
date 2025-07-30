@@ -10,7 +10,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-t from-surface-tertiary to-surface border-t border-border mt-20">
+    <footer className="relative bg-gradient-to-t from-surface-variant to-surface border-t border-border mt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="h-full w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500 via-transparent to-transparent"></div>
