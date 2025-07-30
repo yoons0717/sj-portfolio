@@ -120,10 +120,10 @@ export default function FileUpload({
       {!preview ? (
         <div
           onClick={triggerFileSelect}
-          className="border-2 border-dashed border-accent/30 rounded-lg p-8 text-center cursor-pointer hover:border-accent/50 transition-colors bg-card/20"
+          className="border-4 border-dashed border-accent p-8 text-center cursor-pointer hover:border-neon-yellow transition-colors gaming-card"
         >
           <div className="flex flex-col items-center space-y-3">
-            <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-accent/20 border-2 border-accent flex items-center justify-center">
               {isUploading ? (
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
               ) : (
@@ -131,11 +131,11 @@ export default function FileUpload({
               )}
             </div>
             <div>
-              <p className="text-white font-medium">
-                {isUploading ? 'Uploading...' : 'Click to upload thumbnail'}
+              <p className="gaming-text">
+                {isUploading ? 'UPLOADING SYSTEM...' : 'CLICK TO UPLOAD THUMBNAIL'}
               </p>
-              <p className="text-gray-400 text-sm mt-1">
-                JPEG, PNG, WebP, GIF up to {maxSize}MB
+              <p className="gaming-secondary-text text-sm mt-1" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
+                JPEG, PNG, WEBP, GIF UP TO {maxSize}MB
               </p>
             </div>
           </div>

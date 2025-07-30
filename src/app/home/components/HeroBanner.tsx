@@ -13,22 +13,22 @@ const bannerSlides: BannerSlide[] = [
     id: 1,
     image:
       'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1200&h=600&fit=crop',
-    title: 'Creative Technology',
-    subtitle: 'Pushing boundaries of digital art',
+    title: 'CREATIVE TECHNOLOGY',
+    subtitle: 'PUSHING BOUNDARIES OF DIGITAL ART',
   },
   {
     id: 2,
     image:
       'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=600&fit=crop',
-    title: 'Virtual Production',
-    subtitle: 'Immersive experiences redefined',
+    title: 'VIRTUAL PRODUCTION',
+    subtitle: 'IMMERSIVE EXPERIENCES REDEFINED',
   },
   {
     id: 3,
     image:
       'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop',
-    title: 'Interactive Development',
-    subtitle: 'Code meets creativity',
+    title: 'INTERACTIVE DEVELOPMENT',
+    subtitle: 'CODE MEETS CREATIVITY',
   },
 ];
 
@@ -57,17 +57,27 @@ export default function HeroBanner() {
               className="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-center items-center text-center min-h-[70vh] relative"
               style={{ backgroundImage: `url("${slide.image}")` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-surface/70 via-surface/80 to-surface/90"></div>
+              
+              {/* Gaming Grid Overlay */}
+              <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: `
+                  linear-gradient(rgba(57, 255, 20, 0.3) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(57, 255, 20, 0.3) 1px, transparent 1px)
+                `,
+                backgroundSize: '30px 30px'
+              }}></div>
+
               <div className="relative z-10 px-4 max-w-4xl mx-auto">
-                <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+                <h1 className="text-accent text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-wider leading-tight drop-shadow-lg" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
                   {slide.title}
                 </h1>
-                <p className="text-white/90 text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto leading-relaxed">
+                <p className="text-primary text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto leading-relaxed font-bold tracking-wide" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
                   {slide.subtitle}
                 </p>
                 <div className="mt-8">
-                  <button className="bg-gradient-to-r from-accent to-accent-dark text-white px-8 py-4 rounded-full font-medium text-lg hover:from-accent-light hover:to-accent-medium transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
-                    Explore Projects
+                  <button className="bg-gradient-to-r from-accent to-neon-purple text-surface px-8 py-4 font-black text-lg tracking-wider hover:from-neon-yellow hover:to-accent transition-all duration-300 shadow-xl hover:shadow-accent/20 transform hover:skew-x-12" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
+                    EXPLORE PROJECTS
                   </button>
                 </div>
               </div>
@@ -82,10 +92,10 @@ export default function HeroBanner() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-4 h-4 border-2 transition-all duration-300 ${
               index === currentSlide
-                ? 'bg-white scale-125 shadow-lg'
-                : 'bg-white/50 hover:bg-white/75 hover:scale-110'
+                ? 'bg-accent border-accent scale-125 shadow-lg shadow-accent/50'
+                : 'bg-transparent border-accent hover:bg-accent hover:scale-110'
             }`}
           />
         ))}
@@ -98,7 +108,7 @@ export default function HeroBanner() {
             (prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length,
           )
         }
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all backdrop-blur-sm"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-surface-elevated border-2 border-accent hover:bg-accent hover:text-surface text-accent p-3 transition-all duration-300"
       >
         <svg
           className="w-6 h-6"
@@ -118,7 +128,7 @@ export default function HeroBanner() {
         onClick={() =>
           setCurrentSlide((prev) => (prev + 1) % bannerSlides.length)
         }
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all backdrop-blur-sm"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-surface-elevated border-2 border-accent hover:bg-accent hover:text-surface text-accent p-3 transition-all duration-300"
       >
         <svg
           className="w-6 h-6"

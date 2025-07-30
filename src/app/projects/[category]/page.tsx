@@ -103,88 +103,104 @@ export default function CategoryProjectsPage() {
   }
 
   return (
-    <div
-      className="relative flex min-h-screen flex-col bg-surface-tertiary"
-      style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
-    >
+    <div className="min-h-screen bg-surface text-primary" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
       <Header />
 
       {/* Main Content */}
-      <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
-        <div className="flex flex-col max-w-[960px] flex-1">
-          {/* Page Header */}
-          <div className="flex flex-wrap justify-between gap-3 p-4">
-            <div className="flex min-w-72 flex-col gap-3">
-              <h1 className="text-white tracking-light text-[32px] font-bold leading-tight">
-                Projects
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        
+        {/* PROJECTS Header - Gaming Style */}
+        <div className="flex justify-center mb-12">
+          <div className="relative">
+            <div className="bg-neon-purple px-12 py-4 transform -skew-x-12">
+              <h1 className="text-neon-yellow text-4xl font-black tracking-wider skew-x-12">
+                PROJECTS
               </h1>
-              <p className="text-accent-pink text-sm font-normal leading-normal">
-                Explore a curated collection of my work, showcasing my skills
-                and creativity across various projects.
-              </p>
             </div>
+            <div className="absolute -top-2 -left-2 w-full h-full border-2 border-neon-yellow transform -skew-x-12"></div>
           </div>
+        </div>
 
-          {/* Category Tabs */}
-          <div className="pb-3">
-            <div className="flex border-b border-border-accent px-4 gap-8 overflow-x-auto">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryClick(category)}
-                  className={`flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 whitespace-nowrap transition-colors ${
-                    currentCategory === category
-                      ? 'border-b-accent-pink text-white'
-                      : 'border-b-transparent text-accent-pink hover:text-white'
-                  }`}
-                >
-                  <p className="text-sm font-bold leading-normal tracking-[0.015em]">
-                    {category}
-                  </p>
-                </button>
-              ))}
-            </div>
+        {/* Description */}
+        <div className="text-center mb-8">
+          <p className="text-secondary text-lg max-w-2xl mx-auto">
+            Explore a curated collection of my work, showcasing my skills and creativity across various projects.
+          </p>
+        </div>
+
+        {/* Category Tabs - Gaming Style */}
+        <div className="flex justify-center mb-8">
+          <div className="flex space-x-8">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                className={`px-6 py-3 font-bold text-sm tracking-wider transition-all duration-300 ${
+                  currentCategory === category
+                    ? 'bg-accent text-surface transform skew-x-12'
+                    : 'text-accent hover:text-neon-yellow border-b-2 border-transparent hover:border-accent'
+                }`}
+              >
+                {category.toUpperCase()}
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            {projects.map((project) => (
+        {/* Projects Grid - Gaming Style Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {projects.map((project, index) => {
+            const borderColors = ['border-neon-purple', 'border-neon-yellow', 'border-accent-pink'];
+            const borderColor = borderColors[index % borderColors.length];
+            
+            return (
               <div
                 key={project.id}
-                className="flex flex-col gap-3 pb-3 cursor-pointer group"
+                className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
                 onClick={() => handleProjectClick(project.id)}
               >
-                <div
-                  className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl transition-transform group-hover:scale-105 shadow-lg"
-                  style={{
-                    backgroundImage: `url("${project.thumbnail}")`,
-                  }}
-                />
-                <div className="space-y-2">
-                  <h3 className="text-white text-base font-medium leading-normal group-hover:text-accent-pink transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-accent-pink text-sm font-normal leading-normal line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex justify-between items-center text-xs text-gray-400">
-                    <span>{project.category}</span>
-                    <span>
-                      {new Date(project.createdAt).toLocaleDateString()}
-                    </span>
+                <div className={`border-4 ${borderColor} bg-surface-variant p-1 hover:shadow-2xl hover:shadow-accent/20`}>
+                  {/* Thumbnail */}
+                  <div 
+                    className="w-full h-48 bg-cover bg-center mb-4"
+                    style={{ backgroundImage: `url("${project.thumbnail}")` }}
+                  />
+                  
+                  {/* Content */}
+                  <div className="p-4">
+                    {/* Category and Date */}
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="bg-accent text-surface px-3 py-1 text-xs font-bold tracking-wider">
+                        {project.category.toUpperCase()}
+                      </span>
+                      <span className="text-secondary text-xs font-mono">
+                        {new Date(project.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-primary text-lg font-black mb-3 leading-tight group-hover:text-accent transition-colors">
+                      {project.title.toUpperCase()}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-secondary text-sm leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Load More Button */}
-          <div className="flex justify-center p-4">
-            <button className="bg-gradient-to-r from-pink to-accent-pink text-white px-8 py-3 rounded-full font-medium hover:from-pink-light hover:to-accent-light transition-all duration-300 shadow-lg hover:shadow-xl">
-              Load More Projects
-            </button>
-          </div>
+            );
+          })}
         </div>
+
+        {/* Load More Button - Gaming Style */}
+        <div className="flex justify-center">
+          <button className="bg-gradient-to-r from-accent to-neon-purple text-surface px-8 py-3 font-bold tracking-wider hover:from-neon-yellow hover:to-accent transition-all duration-300 shadow-lg hover:shadow-xl transform hover:skew-x-12">
+            LOAD MORE PROJECTS
+          </button>
+        </div>
+
       </div>
 
       <Footer />

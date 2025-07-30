@@ -201,20 +201,20 @@ const techStack = {
       subtitle="Add a new project to your portfolio"
       action={
         <div className="flex items-center gap-3">
-          <Button
+          <button
             onClick={() => router.push('/admin/projects')}
-            variant="ghost"
-            icon={<ArrowLeft size={18} />}
+            className="bg-surface-elevated text-accent border-2 border-accent px-6 py-3 font-bold tracking-wider hover:bg-accent hover:text-surface transition-all duration-300 flex items-center gap-2"
           >
-            Back to Projects
-          </Button>
-          <Button
+            <ArrowLeft size={18} />
+            BACK TO PROJECTS
+          </button>
+          <button
             onClick={() => setPreviewMode(!previewMode)}
-            variant="secondary"
-            icon={<Eye size={18} />}
+            className="bg-surface-elevated text-neon-purple border-2 border-neon-purple px-6 py-3 font-bold tracking-wider hover:bg-neon-purple hover:text-surface transition-all duration-300 flex items-center gap-2"
           >
-            {previewMode ? 'Edit Mode' : 'Preview'}
-          </Button>
+            <Eye size={18} />
+            {previewMode ? 'EDIT MODE' : 'PREVIEW'}
+          </button>
         </div>
       }
     >
@@ -335,7 +335,7 @@ const techStack = {
               <h2 className="text-white text-xl font-semibold">
                 Project Content
               </h2>
-              <div className="text-accent-variant text-sm">
+              <div className="text-accent-light text-sm">
                 ✨ Rich markdown editor with live preview
               </div>
             </div>
@@ -387,7 +387,7 @@ const techStack = {
                   <h4 className="text-white text-sm font-semibold mb-2">
                     💡 Markdown Tips:
                   </h4>
-                  <div className="text-accent-variant text-xs space-y-1">
+                  <div className="text-accent-light text-xs space-y-1">
                     <p>• **Bold text** and *italic text*</p>
                     <p>• ## Headings and ### Subheadings</p>
                     <p>• ![Image description](image-url)</p>
@@ -402,25 +402,23 @@ const techStack = {
 
           {/* Action Buttons */}
           <div className="flex justify-end gap-4 pt-6 border-t border-input">
-            <Button
+            <button
               onClick={handleCancel}
               disabled={isLoading}
-              variant="secondary"
-              size="lg"
-              icon={<X size={18} />}
+              className="bg-surface-elevated text-accent border-2 border-accent px-8 py-4 font-bold tracking-wider hover:bg-accent hover:text-surface transition-all duration-300 flex items-center gap-2 disabled:opacity-50"
             >
-              Cancel
-            </Button>
+              <X size={18} />
+              CANCEL
+            </button>
 
-            <Button
+            <button
               onClick={handleSubmit}
               disabled={isLoading || previewMode}
-              size="lg"
-              loading={isLoading}
-              icon={!isLoading ? <Save size={18} /> : undefined}
+              className="gaming-button px-8 py-4 text-lg flex items-center gap-2 disabled:opacity-50"
             >
-              {isLoading ? 'Creating...' : 'Create Project'}
-            </Button>
+              {!isLoading && <Save size={18} />}
+              {isLoading ? 'CREATING...' : 'CREATE PROJECT'}
+            </button>
           </div>
         </div>
     </AdminLayout>

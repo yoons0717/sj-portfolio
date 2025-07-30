@@ -104,15 +104,17 @@ export default function HomePage() {
 
   return (
     <PageLayout>
-      <HeroBanner />
-      
-      <div className="px-4 md:px-20 flex flex-1 justify-center py-12">
-        <div className="flex flex-col max-w-[1200px] flex-1">
-          <ProfileSection profile={profileData} />
-          <CategoriesSection
-            categories={categories}
-            onCategoryClick={handleCategoryClick}
-          />
+      <div style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
+        <HeroBanner />
+        
+        <div className="px-4 md:px-20 flex flex-1 justify-center py-12">
+          <div className="flex flex-col max-w-[1200px] flex-1">
+            <ProfileSection profile={profileData} />
+            <CategoriesSection
+              categories={categories}
+              onCategoryClick={handleCategoryClick}
+            />
+          </div>
         </div>
       </div>
     </PageLayout>

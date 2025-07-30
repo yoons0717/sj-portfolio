@@ -15,13 +15,11 @@
   --color-muted: #b0b0b0;
   --color-inverse: #0a0a0a;
 
-  /* Accent Colors - Neon Green/Lime Primary */
+  /* Accent Colors - Neon Green Primary (Simplified) */
   --color-accent: #39ff14;
   --color-accent-light: #66ff44;
   --color-accent-dark: #2dd40f;
-  --color-accent-variant: #7fff00;
   --color-accent-pink: #ff1493;
-  --color-accent-medium: #32cd32;
 
   /* Background Colors - Dark Gaming Theme */
   --color-surface: #0a0a0a;
@@ -33,7 +31,6 @@
 
   /* Border Colors - Gaming Accents */
   --color-border: #333333;
-  --color-border-light: #66ff44;
   --color-border-accent: #39ff14;
   --color-border-variant: #7f39fb;
 
@@ -68,12 +65,10 @@ body {
 === 게이밍 뉴스 인터페이스 색상 팔레트 ===
 직접 색상 주입 시 사용할 표준 색상들 (예: bg-[#39ff14])
 
-Neon Green Theme (Primary):
+Neon Green Theme (Primary - Simplified):
 - Primary: #39ff14 (메인 네온 그린)
 - Light: #66ff44 (밝은 그린, 호버)
-- Dark: #2dd40f (진한 그린)
-- Variant: #7fff00 (라임 그린)
-- Medium: #32cd32 (중간 그린)
+- Dark: #2dd40f (진한 그린, 강조)
 
 Gaming Accents:
 - Neon Purple: #7f39fb (보조 액센트)
@@ -107,3 +102,71 @@ Status:
 - Error: #ff4444
 - Info: #00bfff
 */
+
+/* Common Gaming UI Classes */
+.gaming-header {
+  @apply bg-neon-purple px-12 py-4 transform -skew-x-12;
+}
+
+.gaming-header-text {
+  @apply text-neon-yellow text-4xl font-black tracking-wider skew-x-12;
+}
+
+.gaming-header-border {
+  @apply absolute -top-2 -left-2 w-full h-full border-2 border-neon-yellow transform -skew-x-12;
+}
+
+.gaming-button {
+  @apply bg-gradient-to-r from-accent to-neon-purple text-surface px-6 py-3 font-bold tracking-wider hover:from-neon-yellow hover:to-accent transition-all duration-300 shadow-lg hover:shadow-accent/20 transform hover:skew-x-12;
+}
+
+.gaming-card {
+  @apply bg-surface-variant border-4 border-accent p-4 hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300;
+}
+
+.gaming-input {
+  @apply bg-surface-elevated text-primary border-2 border-accent px-4 py-3 font-bold tracking-wide focus:border-neon-yellow outline-none transition-all duration-300;
+}
+
+.gaming-tab {
+  @apply px-6 py-3 font-bold text-sm tracking-wider transition-all duration-300;
+}
+
+.gaming-tab-active {
+  @apply bg-accent text-surface transform skew-x-12;
+}
+
+.gaming-tab-inactive {
+  @apply text-accent hover:text-neon-yellow border-b-2 border-transparent hover:border-accent;
+}
+
+.gaming-grid-bg {
+  background-image: 
+    linear-gradient(rgba(57, 255, 20, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.gaming-title {
+  @apply text-accent font-black tracking-wider;
+}
+
+.gaming-text {
+  @apply text-primary font-bold tracking-wide;
+}
+
+.gaming-secondary-text {
+  @apply text-secondary font-medium;
+}
+
+.gaming-border {
+  @apply border-2 border-accent;
+}
+
+.gaming-border-variant {
+  @apply border-2 border-neon-purple;
+}
+
+.gaming-border-yellow {
+  @apply border-2 border-neon-yellow;
+}

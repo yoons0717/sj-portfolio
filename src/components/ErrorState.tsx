@@ -4,17 +4,19 @@ interface ErrorStateProps {
 
 export default function ErrorState({ error }: ErrorStateProps) {
   return (
-    <div className="min-h-screen bg-surface flex items-center justify-center">
-      <div className="text-center">
-        <div className="text-error text-xl mb-2">
-          Oops! Something went wrong
+    <div className="min-h-screen bg-surface flex items-center justify-center gaming-grid-bg" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
+      <div className="text-center gaming-card max-w-md">
+        <div className="text-error text-2xl font-black tracking-wider mb-6 animate-pulse">
+          SYSTEM ERROR!
         </div>
-        <div className="text-secondary text-sm">{error}</div>
+        <div className="gaming-secondary-text text-sm mb-6 bg-surface-elevated p-4 border-l-4 border-error">
+          {error}
+        </div>
         <button
           onClick={() => window.location.reload()}
-          className="mt-4 bg-accent text-primary px-6 py-2 rounded-lg hover:bg-accent-light transition-colors"
+          className="gaming-button bg-gradient-to-r from-error to-neon-purple hover:from-neon-yellow hover:to-error"
         >
-          Try Again
+          RETRY SYSTEM
         </button>
       </div>
     </div>

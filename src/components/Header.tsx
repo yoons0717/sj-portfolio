@@ -5,9 +5,9 @@ export default function Header() {
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face';
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-border px-10 py-3">
+    <header className="flex items-center justify-between whitespace-nowrap border-b-4 border-accent px-10 py-4 bg-surface-variant" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
       <div className="flex items-center gap-4 text-primary">
-        <div className="size-4">
+        <div className="size-6 text-accent">
           <svg
             viewBox="0 0 48 48"
             fill="none"
@@ -26,44 +26,44 @@ export default function Header() {
             </defs>
           </svg>
         </div>
-        <h2 className="text-primary text-lg font-bold leading-tight tracking-[-0.015em]">
-          Portfolio
+        <h2 className="text-accent text-xl font-black leading-tight tracking-wider">
+          PORTFOLIO
         </h2>
       </div>
 
       <div className="flex flex-1 justify-end gap-8">
         <nav className="flex items-center gap-9">
           <a
-            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
+            className="text-primary text-sm font-bold leading-normal hover:text-accent transition-colors duration-300 tracking-wider hover:skew-x-12 transform transition-transform"
             href="#about"
           >
-            About
+            ABOUT
           </a>
           <a
-            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
+            className="text-primary text-sm font-bold leading-normal hover:text-accent transition-colors duration-300 tracking-wider hover:skew-x-12 transform transition-transform"
             href="#projects"
           >
-            Projects
+            PROJECTS
           </a>
           <a
-            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
+            className="text-primary text-sm font-bold leading-normal hover:text-accent transition-colors duration-300 tracking-wider hover:skew-x-12 transform transition-transform"
             href="#contact"
           >
-            Contact
+            CONTACT
           </a>
         </nav>
 
         <div className="flex gap-2">
-          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-input text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-accent-dark transition-colors duration-300">
+          <button className="flex cursor-pointer items-center justify-center h-10 bg-surface-elevated text-accent border-2 border-accent gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3 hover:bg-accent hover:text-surface transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
             <Search size={20} />
           </button>
-          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-input text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-accent-dark transition-colors duration-300">
+          <button className="flex cursor-pointer items-center justify-center h-10 bg-surface-elevated text-accent border-2 border-accent gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3 hover:bg-accent hover:text-surface transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
             <Menu size={20} />
           </button>
         </div>
 
         <div
-          className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer hover:ring-2 hover:ring-accent transition-all duration-300"
+          className="bg-center bg-no-repeat aspect-square bg-cover size-10 cursor-pointer border-2 border-accent hover:border-neon-yellow transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
           style={{ backgroundImage: `url("${profileAvatar}")` }}
         />
       </div>

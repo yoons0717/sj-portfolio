@@ -160,20 +160,21 @@ export default function CategoriesPage() {
       title="Category Management"
       subtitle="Manage your project categories"
       action={
-        <Button
+        <button
           onClick={() => setShowCreateForm(true)}
           disabled={showCreateForm}
-          icon={<Plus size={18} />}
+          className="gaming-button flex items-center gap-2 disabled:opacity-50"
         >
-          New Category
-        </Button>
+          <Plus size={18} />
+          NEW CATEGORY
+        </button>
       }
     >
         {/* Create Form */}
         {showCreateForm && (
-          <div className="bg-card rounded-xl p-6 shadow-xl mb-8">
-            <h2 className="text-white text-xl font-semibold mb-6">
-              Create New Category
+          <div className="gaming-card mb-8">
+            <h2 className="gaming-title text-xl mb-6">
+              CREATE NEW CATEGORY
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -229,29 +230,29 @@ export default function CategoriesPage() {
             </div>
 
             <div className="flex justify-end gap-3 mt-6">
-              <Button
+              <button
                 onClick={cancelEdit}
-                variant="secondary"
-                icon={<X size={18} />}
+                className="bg-surface-elevated text-accent border-2 border-accent px-6 py-3 font-bold tracking-wider hover:bg-accent hover:text-surface transition-all duration-300 flex items-center gap-2"
               >
-                Cancel
-              </Button>
-              <Button
+                <X size={18} />
+                CANCEL
+              </button>
+              <button
                 onClick={handleCreate}
-                variant="success"
-                icon={<Save size={18} />}
+                className="gaming-button flex items-center gap-2"
               >
-                Create
-              </Button>
+                <Save size={18} />
+                CREATE
+              </button>
             </div>
           </div>
         )}
 
         {/* Categories List */}
-        <div className="bg-card rounded-xl shadow-xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-input">
-            <h2 className="text-white text-xl font-semibold">
-              Categories ({categories.length})
+        <div className="gaming-card overflow-hidden">
+          <div className="px-6 py-4 border-b-2 border-accent">
+            <h2 className="gaming-title text-xl">
+              CATEGORIES ({categories.length})
             </h2>
           </div>
 
