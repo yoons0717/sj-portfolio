@@ -16,10 +16,7 @@ export default function PageLayout({
   className = '',
 }: PageLayoutProps) {
   return (
-    <div 
-      className={`relative flex min-h-screen flex-col bg-[#221122] ${className}`}
-      style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
-    >
+    <div className={`relative flex min-h-screen flex-col bg-surface font-sans ${className}`}>
       {showHeader && <Header />}
       
       <main className="flex-1">

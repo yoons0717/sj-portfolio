@@ -5,8 +5,8 @@ export default function Header() {
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face';
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#472447] px-10 py-3">
-      <div className="flex items-center gap-4 text-white">
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-border px-10 py-3">
+      <div className="flex items-center gap-4 text-primary">
         <div className="size-4">
           <svg
             viewBox="0 0 48 48"
@@ -26,7 +26,7 @@ export default function Header() {
             </defs>
           </svg>
         </div>
-        <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+        <h2 className="text-primary text-lg font-bold leading-tight tracking-[-0.015em]">
           Portfolio
         </h2>
       </div>
@@ -34,19 +34,19 @@ export default function Header() {
       <div className="flex flex-1 justify-end gap-8">
         <nav className="flex items-center gap-9">
           <a
-            className="text-white text-sm font-medium leading-normal hover:text-[#c893c8] transition-colors"
+            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
             href="#about"
           >
             About
           </a>
           <a
-            className="text-white text-sm font-medium leading-normal hover:text-[#c893c8] transition-colors"
+            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
             href="#projects"
           >
             Projects
           </a>
           <a
-            className="text-white text-sm font-medium leading-normal hover:text-[#c893c8] transition-colors"
+            className="text-primary text-sm font-medium leading-normal hover:text-accent transition-colors duration-300"
             href="#contact"
           >
             Contact
@@ -54,16 +54,16 @@ export default function Header() {
         </nav>
 
         <div className="flex gap-2">
-          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#472447] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#5a305a] transition-colors">
+          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-input text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-accent-dark transition-colors duration-300">
             <Search size={20} />
           </button>
-          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#472447] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#5a305a] transition-colors">
+          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-input text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-accent-dark transition-colors duration-300">
             <Menu size={20} />
           </button>
         </div>
 
         <div
-          className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer hover:ring-2 hover:ring-[#c893c8] transition-all"
+          className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer hover:ring-2 hover:ring-accent transition-all duration-300"
           style={{ backgroundImage: `url("${profileAvatar}")` }}
         />
       </div>

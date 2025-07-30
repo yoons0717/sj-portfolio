@@ -20,15 +20,15 @@ export default function Button({
 }: ButtonProps) {
   const baseClasses = `
     inline-flex items-center justify-center font-medium rounded-lg
-    transition-all disabled:opacity-50 disabled:cursor-not-allowed
+    transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed
   `.trim();
 
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-[#cb90cb] to-[#8b5a8b] hover:from-[#d4a4d4] hover:to-[#9d6b9d] text-white shadow-lg hover:shadow-xl',
-    secondary: 'bg-[#472447] hover:bg-[#5a305a] text-white border border-[#472447]',
-    success: 'bg-green-600 hover:bg-green-700 text-white',
-    danger: 'bg-red-600 hover:bg-red-700 text-white',
-    ghost: 'text-[#c893c8] hover:text-[#d4a4d4] hover:bg-[#472447]/20',
+    primary: `bg-gradient-to-r from-accent to-accent-dark hover:from-accent-light hover:to-accent text-primary shadow-lg hover:shadow-xl`,
+    secondary: `bg-input hover:bg-accent-dark text-primary border border-border`,
+    success: `bg-success hover:bg-green-700 text-primary`,
+    danger: `bg-error hover:bg-red-700 text-primary`,
+    ghost: `text-accent hover:text-accent-light hover:bg-input/20`,
   };
 
   const sizeClasses = {

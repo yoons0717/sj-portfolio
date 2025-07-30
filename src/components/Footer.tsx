@@ -4,14 +4,13 @@ import {
   ExternalLink,
   Github,
   Twitter,
-  Instagram,
   Linkedin,
   Heart,
 } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-t from-[#1a0e1a] to-[#221122] border-t border-[#472447] mt-20">
+    <footer className="relative bg-gradient-to-t from-surface-tertiary to-surface border-t border-border mt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="h-full w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500 via-transparent to-transparent"></div>
@@ -23,7 +22,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#c893c8] to-[#8b5a8b] rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent-dark rounded-lg flex items-center justify-center">
                 <div className="w-4 h-4">
                   <svg
                     viewBox="0 0 48 48"
@@ -44,9 +43,9 @@ export default function Footer() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-white text-xl font-bold">Sophia Carter</h3>
+              <h3 className="text-primary text-xl font-bold">Sophia Carter</h3>
             </div>
-            <p className="text-gray-300 text-base leading-relaxed mb-6 max-w-md">
+            <p className="text-secondary text-base leading-relaxed mb-6 max-w-md">
               Creative technologist passionate about merging art and technology
               to create immersive experiences. Lets build something amazing
               together.
@@ -54,7 +53,7 @@ export default function Footer() {
             <div className="flex items-center gap-4">
               <a
                 href="mailto:sophia.carter@email.com"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#c893c8] to-[#8b5a8b] text-white px-6 py-3 rounded-full font-medium hover:from-[#d4a4d4] hover:to-[#9d6b9d] transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-accent-dark text-primary px-6 py-3 rounded-full font-medium hover:from-accent-light hover:to-accent transition-all duration-500 shadow-lg hover:shadow-xl"
               >
                 <Mail size={18} />
                 Get In Touch
@@ -64,13 +63,13 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h4 className="text-white text-lg font-semibold mb-6">Connect</h4>
+            <h4 className="text-primary text-lg font-semibold mb-6">Connect</h4>
             <div className="space-y-4">
               <a
                 href="#"
-                className="flex items-center gap-3 text-gray-300 hover:text-[#c893c8] transition-colors duration-300 group"
+                className="flex items-center gap-3 text-secondary hover:text-accent transition-colors duration-500 group"
               >
-                <div className="p-2 bg-[#472447] rounded-lg group-hover:bg-[#5a305a] transition-colors">
+                <div className="p-2 bg-input rounded-lg group-hover:bg-accent-dark transition-colors">
                   <Github size={18} />
                 </div>
                 <span>GitHub</span>
@@ -82,9 +81,9 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="flex items-center gap-3 text-gray-300 hover:text-[#c893c8] transition-colors duration-300 group"
+                className="flex items-center gap-3 text-secondary hover:text-accent transition-colors duration-500 group"
               >
-                <div className="p-2 bg-[#472447] rounded-lg group-hover:bg-[#5a305a] transition-colors">
+                <div className="p-2 bg-input rounded-lg group-hover:bg-accent-dark transition-colors">
                   <Linkedin size={18} />
                 </div>
                 <span>LinkedIn</span>
@@ -96,9 +95,9 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="flex items-center gap-3 text-gray-300 hover:text-[#c893c8] transition-colors duration-300 group"
+                className="flex items-center gap-3 text-secondary hover:text-accent transition-colors duration-500 group"
               >
-                <div className="p-2 bg-[#472447] rounded-lg group-hover:bg-[#5a305a] transition-colors">
+                <div className="p-2 bg-input rounded-lg group-hover:bg-accent-dark transition-colors">
                   <Twitter size={18} />
                 </div>
                 <span>Twitter</span>
@@ -112,27 +111,27 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-[#472447] to-transparent mb-8"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8"></div>
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-2 text-muted text-sm">
             <span>© 2024 Sophia Carter. Made with</span>
-            <Heart size={16} className="text-[#c893c8] fill-current" />
+            <Heart size={16} className="text-accent fill-current" />
             <span>and creativity</span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-gray-400">
+          <div className="flex items-center gap-6 text-sm text-muted">
             <a
               href="#privacy"
-              className="hover:text-[#c893c8] transition-colors"
+              className="hover:text-accent transition-colors duration-300"
             >
               Privacy Policy
             </a>
-            <a href="#terms" className="hover:text-[#c893c8] transition-colors">
+            <a href="#terms" className="hover:text-accent transition-colors duration-300">
               Terms of Service
             </a>
-            <span className="text-[#c893c8]">v2.0.1</span>
+            <span className="text-accent">v2.0.1</span>
           </div>
         </div>
       </div>

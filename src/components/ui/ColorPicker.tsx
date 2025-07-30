@@ -18,7 +18,7 @@ export default function ColorPicker({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-white text-sm font-medium">
+        <label className="block text-primary text-sm font-medium">
           {label}
         </label>
       )}
@@ -29,10 +29,10 @@ export default function ColorPicker({
             key={color}
             type="button"
             onClick={() => onChange(color)}
-            className={`w-8 h-8 rounded-full border-2 transition-all ${
+            className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
               value === color
-                ? 'border-white scale-110'
-                : 'border-gray-600 hover:border-gray-400'
+                ? `border-primary scale-110`
+                : `border-muted hover:border-gray-400`
             }`}
             style={{ backgroundColor: color }}
             title={color}
@@ -41,7 +41,7 @@ export default function ColorPicker({
       </div>
       
       {error && (
-        <p className="text-red-400 text-sm">{error}</p>
+        <p className="text-error text-sm">{error}</p>
       )}
     </div>
   );
