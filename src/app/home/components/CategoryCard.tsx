@@ -3,7 +3,7 @@ import { CategoryDisplay } from '@/types';
 interface CategoryCardProps {
   category: CategoryDisplay;
   index: number;
-  onClick: (categoryName: string) => void;
+  onClick: (categoryId: string) => void;
 }
 
 export default function CategoryCard({
@@ -15,7 +15,7 @@ export default function CategoryCard({
     <div
       key={category.name}
       className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-      onClick={() => onClick(category.name)}
+      onClick={() => onClick(category.id)}
       style={{
         animationDelay: `${index * 100}ms`,
       }}

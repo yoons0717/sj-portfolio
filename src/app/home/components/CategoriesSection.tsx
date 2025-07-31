@@ -3,7 +3,7 @@ import { CategoryDisplay } from '@/types';
 
 interface CategoriesSectionProps {
   categories: CategoryDisplay[];
-  onCategoryClick: (categoryName: string) => void;
+  onCategoryClick: (categoryId: string) => void;
 }
 
 export default function CategoriesSection({

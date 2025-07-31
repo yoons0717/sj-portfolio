@@ -1,8 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import { Category, CategoryInsert, CategoryUpdate } from '@/types';
 
-// 활성 카테고리만 가져오기 (사용자용)
-export async function getCategories() {
+export async function getAllCategories() {
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -11,21 +10,6 @@ export async function getCategories() {
 
   if (error) {
     console.error('Error fetching categories:', error);
-    return null;
-  }
-
-  return data;
-}
-
-// 모든 카테고리 가져오기 (관리자용)
-export async function getAllCategories() {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching all categories:', error);
     return null;
   }
 
@@ -95,4 +79,3 @@ export async function getCategory(id: string): Promise<Category | null> {
 
   return data;
 }
-

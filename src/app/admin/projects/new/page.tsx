@@ -6,10 +6,10 @@ import dynamic from 'next/dynamic';
 import { Save, X, Eye, ArrowLeft } from 'lucide-react';
 import { createProject } from '@/lib/api/projects';
 import { CategorySimple } from '@/types';
-import { getCategories } from '@/lib/api/categories';
+import { getAllCategories } from '@/lib/api/categories';
 import FileUpload from '@/components/FileUpload';
 import { AdminLayout } from '@/components/layouts';
-import { Button, Input, Select } from '@/components/ui';
+import { Input, Select } from '@/components/ui';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -124,7 +124,7 @@ const techStack = {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const categoriesData = await getCategories();
+        const categoriesData = await getAllCategories();
         if (categoriesData && categoriesData.length > 0) {
           setCategories(categoriesData);
           setFormData((prev) => ({
@@ -218,209 +218,212 @@ const techStack = {
         </div>
       }
     >
-        <div className="space-y-8">
-          {/* Basic Information */}
-          <div className="bg-card rounded-xl p-6 shadow-xl">
-            <h2 className="text-white text-xl font-semibold mb-6">
-              Basic Information
-            </h2>
+      <div className="space-y-8">
+        {/* Basic Information */}
+        <div className="bg-card rounded-xl p-6 shadow-xl">
+          <h2 className="text-white text-xl font-semibold mb-6">
+            Basic Information
+          </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Project Title */}
-              <div className="lg:col-span-2">
-                <Input
-                  label="Project Title *"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      title: e.target.value,
-                    }))
-                  }
-                  error={errors.title}
-                  placeholder="Enter project title..."
-                  disabled={previewMode}
-                />
-              </div>
-
-              {/* Category */}
-              <div>
-                <Select
-                  label="Category *"
-                  value={formData.category_id}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      category_id: e.target.value,
-                    }))
-                  }
-                  options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
-                  error={errors.category_id}
-                  placeholder="Select a category..."
-                  disabled={previewMode}
-                />
-
-                {/* Category Preview */}
-                {formData.category_id && (
-                  <div className="mt-2 flex items-center gap-2">
-                    {(() => {
-                      const selectedCategory = categories.find(
-                        (c) => c.id === formData.category_id,
-                      );
-                      return selectedCategory ? (
-                        <>
-                          <div
-                            className="w-3 h-3 rounded-full"
-                            style={{
-                              backgroundColor: selectedCategory.color,
-                            }}
-                          />
-                          <span className="text-gray-400 text-sm">
-                            Selected: {selectedCategory.name}
-                          </span>
-                        </>
-                      ) : null;
-                    })()}
-                  </div>
-                )}
-              </div>
-
-              {/* Thumbnail Upload */}
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">
-                  🖼️ Project Thumbnail *
-                </label>
-                {!previewMode ? (
-                  <FileUpload
-                    currentUrl={formData.thumbnail_url}
-                    onUploadSuccess={(url) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        thumbnail_url: url,
-                      }));
-                      // 에러 지우기
-                      setErrors((prev) => ({ ...prev, thumbnail_url: '' }));
-                    }}
-                    onUploadError={(error) => {
-                      setErrors((prev) => ({ ...prev, thumbnail_url: error }));
-                    }}
-                    className="w-full"
-                  />
-                ) : (
-                  // 프리뷰 모드에서는 읽기 전용으로 표시
-                  <div className="bg-input rounded-lg p-4">
-                    {formData.thumbnail_url ? (
-                      <div className="text-accent text-sm">
-                        ✅ Thumbnail uploaded
-                      </div>
-                    ) : (
-                      <div className="text-gray-400 text-sm">
-                        ❌ No thumbnail uploaded
-                      </div>
-                    )}
-                  </div>
-                )}
-                {errors.thumbnail_url && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.thumbnail_url}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Content Editor */}
-          <div className="bg-card rounded-xl p-6 shadow-xl">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-white text-xl font-semibold">
-                Project Content
-              </h2>
-              <div className="text-accent-light text-sm">
-                ✨ Rich markdown editor with live preview
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Project Title */}
+            <div className="lg:col-span-2">
+              <Input
+                label="Project Title *"
+                value={formData.title}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    title: e.target.value,
+                  }))
+                }
+                error={errors.title}
+                placeholder="Enter project title..."
+                disabled={previewMode}
+              />
             </div>
 
-            {previewMode ? (
-              <div className="prose prose-invert prose-lg max-w-none bg-input rounded-lg p-6">
-                <div data-color-mode="dark">
-                  <MarkdownPreview
-                    source={formData.content}
-                    style={{
-                      backgroundColor: 'transparent',
-                      color: '#ffffff',
-                    }}
-                  />
+            {/* Category */}
+            <div>
+              <Select
+                label="Category *"
+                value={formData.category_id}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    category_id: e.target.value,
+                  }))
+                }
+                options={categories.map((cat) => ({
+                  value: cat.id,
+                  label: cat.name,
+                }))}
+                error={errors.category_id}
+                placeholder="Select a category..."
+                disabled={previewMode}
+              />
+
+              {/* Category Preview */}
+              {formData.category_id && (
+                <div className="mt-2 flex items-center gap-2">
+                  {(() => {
+                    const selectedCategory = categories.find(
+                      (c) => c.id === formData.category_id,
+                    );
+                    return selectedCategory ? (
+                      <>
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{
+                            backgroundColor: selectedCategory.color,
+                          }}
+                        />
+                        <span className="text-gray-400 text-sm">
+                          Selected: {selectedCategory.name}
+                        </span>
+                      </>
+                    ) : null;
+                  })()}
                 </div>
-              </div>
-            ) : (
-              <div>
-                <div data-color-mode="dark">
-                  <MDEditor
-                    value={formData.content}
-                    onChange={(val) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        content: val || '',
-                      }))
-                    }
-                    height={600}
-                    preview="edit"
-                    hideToolbar={false}
-                    textareaProps={{
-                      placeholder: 'Write your project content in markdown...',
-                      style: {
-                        fontSize: 14,
-                        lineHeight: 1.6,
-                        fontFamily:
-                          'ui-monospace, SFMono-Regular, "SF Mono", monospace',
-                      },
-                    }}
-                  />
+              )}
+            </div>
+
+            {/* Thumbnail Upload */}
+            <div>
+              <label className="block text-white text-sm font-medium mb-2">
+                🖼️ Project Thumbnail *
+              </label>
+              {!previewMode ? (
+                <FileUpload
+                  currentUrl={formData.thumbnail_url}
+                  onUploadSuccess={(url) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      thumbnail_url: url,
+                    }));
+
+                    setErrors((prev) => ({ ...prev, thumbnail_url: '' }));
+                  }}
+                  onUploadError={(error) => {
+                    setErrors((prev) => ({ ...prev, thumbnail_url: error }));
+                  }}
+                  className="w-full"
+                />
+              ) : (
+                // 프리뷰 모드에서는 읽기 전용으로 표시
+                <div className="bg-input rounded-lg p-4">
+                  {formData.thumbnail_url ? (
+                    <div className="text-accent text-sm">
+                      ✅ Thumbnail uploaded
+                    </div>
+                  ) : (
+                    <div className="text-gray-400 text-sm">
+                      ❌ No thumbnail uploaded
+                    </div>
+                  )}
                 </div>
-
-                {errors.content && (
-                  <p className="text-red-400 text-sm mt-2">{errors.content}</p>
-                )}
-
-                {/* Markdown Tips */}
-                <div className="bg-input rounded-lg p-4 mt-4">
-                  <h4 className="text-white text-sm font-semibold mb-2">
-                    💡 Markdown Tips:
-                  </h4>
-                  <div className="text-accent-light text-xs space-y-1">
-                    <p>• **Bold text** and *italic text*</p>
-                    <p>• ## Headings and ### Subheadings</p>
-                    <p>• ![Image description](image-url)</p>
-                    <p>• `code` and ```code blocks```</p>
-                    <p>• Blockquotes for highlights</p>
-                    <p>• | Tables | Are | Supported |</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex justify-end gap-4 pt-6 border-t border-input">
-            <button
-              onClick={handleCancel}
-              disabled={isLoading}
-              className="bg-surface-elevated text-accent border-2 border-accent px-8 py-4 font-bold tracking-wider hover:bg-accent hover:text-surface transition-all duration-300 flex items-center gap-2 disabled:opacity-50"
-            >
-              <X size={18} />
-              CANCEL
-            </button>
-
-            <button
-              onClick={handleSubmit}
-              disabled={isLoading || previewMode}
-              className="gaming-button px-8 py-4 text-lg flex items-center gap-2 disabled:opacity-50"
-            >
-              {!isLoading && <Save size={18} />}
-              {isLoading ? 'CREATING...' : 'CREATE PROJECT'}
-            </button>
+              )}
+              {errors.thumbnail_url && (
+                <p className="text-red-400 text-sm mt-1">
+                  {errors.thumbnail_url}
+                </p>
+              )}
+            </div>
           </div>
         </div>
+
+        {/* Content Editor */}
+        <div className="bg-card rounded-xl p-6 shadow-xl">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-white text-xl font-semibold">
+              Project Content
+            </h2>
+            <div className="text-accent-light text-sm">
+              ✨ Rich markdown editor with live preview
+            </div>
+          </div>
+
+          {previewMode ? (
+            <div className="prose prose-invert prose-lg max-w-none bg-input rounded-lg p-6">
+              <div data-color-mode="dark">
+                <MarkdownPreview
+                  source={formData.content}
+                  style={{
+                    backgroundColor: 'transparent',
+                    color: '#ffffff',
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div data-color-mode="dark">
+                <MDEditor
+                  value={formData.content}
+                  onChange={(val) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      content: val || '',
+                    }))
+                  }
+                  height={600}
+                  preview="edit"
+                  hideToolbar={false}
+                  textareaProps={{
+                    placeholder: 'Write your project content in markdown...',
+                    style: {
+                      fontSize: 14,
+                      lineHeight: 1.6,
+                      fontFamily:
+                        'ui-monospace, SFMono-Regular, "SF Mono", monospace',
+                    },
+                  }}
+                />
+              </div>
+
+              {errors.content && (
+                <p className="text-red-400 text-sm mt-2">{errors.content}</p>
+              )}
+
+              {/* Markdown Tips */}
+              <div className="bg-input rounded-lg p-4 mt-4">
+                <h4 className="text-white text-sm font-semibold mb-2">
+                  💡 Markdown Tips:
+                </h4>
+                <div className="text-accent-light text-xs space-y-1">
+                  <p>• **Bold text** and *italic text*</p>
+                  <p>• ## Headings and ### Subheadings</p>
+                  <p>• ![Image description](image-url)</p>
+                  <p>• `code` and ```code blocks```</p>
+                  <p>• Blockquotes for highlights</p>
+                  <p>• | Tables | Are | Supported |</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-end gap-4 pt-6 border-t border-input">
+          <button
+            onClick={handleCancel}
+            disabled={isLoading}
+            className="bg-surface-elevated text-accent border-2 border-accent px-8 py-4 font-bold tracking-wider hover:bg-accent hover:text-surface transition-all duration-300 flex items-center gap-2 disabled:opacity-50"
+          >
+            <X size={18} />
+            CANCEL
+          </button>
+
+          <button
+            onClick={handleSubmit}
+            disabled={isLoading || previewMode}
+            className="gaming-button px-8 py-4 text-lg flex items-center gap-2 disabled:opacity-50"
+          >
+            {!isLoading && <Save size={18} />}
+            {isLoading ? 'CREATING...' : 'CREATE PROJECT'}
+          </button>
+        </div>
+      </div>
     </AdminLayout>
   );
 }

@@ -14,15 +14,16 @@ export default function AdminLayout({
   action,
 }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-surface text-primary" style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}>
-      {/* Gaming Grid Background */}
+    <div
+      className="min-h-screen bg-surface text-primary"
+      style={{ fontFamily: '"Orbitron", "Exo 2", monospace' }}
+    >
       <div className="fixed inset-0 gaming-grid-bg opacity-5 pointer-events-none"></div>
-      
+
       {/* Admin Header */}
       <header className="relative bg-surface-variant border-b-4 border-accent px-6 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            {/* Gaming Style Title */}
             <div className="flex justify-center mb-4">
               <div className="relative">
                 <div className="gaming-header">
@@ -34,7 +35,9 @@ export default function AdminLayout({
               </div>
             </div>
             {subtitle && (
-              <p className="gaming-secondary-text text-center text-sm mt-2">{subtitle}</p>
+              <p className="gaming-secondary-text text-center text-sm mt-2">
+                {subtitle}
+              </p>
             )}
           </div>
           {action && <div className="relative z-10">{action}</div>}
@@ -42,9 +45,7 @@ export default function AdminLayout({
       </header>
 
       {/* Content */}
-      <main className="relative max-w-7xl mx-auto px-6 py-8">
-        {children}
-      </main>
+      <main className="relative max-w-7xl mx-auto px-6 py-8">{children}</main>
     </div>
   );
 }
