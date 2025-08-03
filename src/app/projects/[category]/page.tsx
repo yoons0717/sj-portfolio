@@ -230,13 +230,6 @@ export default function CategoryProjectsPage() {
             </div>
           )}
         </div>
-
-        {/* Load More Button - Gaming Style - 향후 페이지네이션 구현 시 활성화 */}
-        {/* <div className="flex justify-center">
-          <button className="bg-gradient-to-r from-accent to-neon-purple text-surface px-8 py-3 font-bold tracking-wider hover:from-neon-yellow hover:to-accent transition-all duration-300 shadow-lg hover:shadow-xl transform hover:skew-x-12">
-            LOAD MORE PROJECTS
-          </button>
-        </div> */}
       </div>
 
       <Footer />
