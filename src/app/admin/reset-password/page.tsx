@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -16,11 +16,10 @@ function ResetPasswordContent() {
   const [error, setError] = useState('');
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleAuthFromHash = async () => {
-      // URL fragment(#)에서 토큰 추출 
+      // URL fragment(#)에서 토큰 추출
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const accessToken = hashParams.get('access_token');
       const refreshToken = hashParams.get('refresh_token');
@@ -33,53 +32,61 @@ function ResetPasswordContent() {
       console.log('Type:', type);
       console.log('Code:', code);
 
-    if (accessToken && refreshToken && type === 'recovery') {
-      // URL 디코딩 및 토큰 검증
-      console.log('Raw access token:', accessToken);
-      console.log('Raw refresh token:', refreshToken);
-      
-      try {
-        // 토큰 디코딩
-        const decodedAccessToken = decodeURIComponent(accessToken);
-        const decodedRefreshToken = decodeURIComponent(refreshToken);
-        
-        console.log('Decoded access token:', decodedAccessToken);
-        console.log('Decoded refresh token:', decodedRefreshToken);
-        
-        // 세션 설정
-        supabase.auth
-          .setSession({
-            access_token: decodedAccessToken,
-            refresh_token: decodedRefreshToken,
-          })
-          .then(({ data, error }) => {
-            console.log('Session set result:', { data, error });
-            if (!error && data.session) {
-              setStep('reset');
-              // URL을 깔끔하게 정리
-              window.history.replaceState({}, document.title, '/admin/reset-password');
-            } else if (error) {
-              console.error('Session setting failed:', error);
-              setError('토큰이 유효하지 않습니다. 새로운 재설정 링크를 요청해주세요.');
-            }
-          });
-      } catch (err) {
-        console.error('Token parsing error:', err);
-        setError('토큰 파싱 중 오류가 발생했습니다. 새로운 재설정 링크를 요청해주세요.');
-      }
-    }
+      if (accessToken && refreshToken && type === 'recovery') {
+        // URL 디코딩 및 토큰 검증
+        console.log('Raw access token:', accessToken);
+        console.log('Raw refresh token:', refreshToken);
 
-    // 인증 상태 변경 감지
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+        try {
+          // 토큰 디코딩
+          const decodedAccessToken = decodeURIComponent(accessToken);
+          const decodedRefreshToken = decodeURIComponent(refreshToken);
+
+          console.log('Decoded access token:', decodedAccessToken);
+          console.log('Decoded refresh token:', decodedRefreshToken);
+
+          // 세션 설정
+          supabase.auth
+            .setSession({
+              access_token: decodedAccessToken,
+              refresh_token: decodedRefreshToken,
+            })
+            .then(({ data, error }) => {
+              console.log('Session set result:', { data, error });
+              if (!error && data.session) {
+                setStep('reset');
+                // URL을 깔끔하게 정리
+                window.history.replaceState(
+                  {},
+                  document.title,
+                  '/admin/reset-password',
+                );
+              } else if (error) {
+                console.error('Session setting failed:', error);
+                setError(
+                  '토큰이 유효하지 않습니다. 새로운 재설정 링크를 요청해주세요.',
+                );
+              }
+            });
+        } catch (err) {
+          console.error('Token parsing error:', err);
+          setError(
+            '토큰 파싱 중 오류가 발생했습니다. 새로운 재설정 링크를 요청해주세요.',
+          );
+        }
+      }
+
+      // 인증 상태 변경 감지
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange(async (event, session) => {
         console.log('Auth state change:', event, session);
         if (event === 'PASSWORD_RECOVERY') {
           setStep('reset');
         }
-      }
-    );
+      });
 
-    return () => subscription.unsubscribe();
+      return () => subscription.unsubscribe();
     };
 
     handleAuthFromHash();

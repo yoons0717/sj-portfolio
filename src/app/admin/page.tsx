@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Plus, FolderOpen, Settings, FileText, BarChart3, Users } from 'lucide-react';
+import { Plus, FolderOpen, Settings, FileText, BarChart3 } from 'lucide-react';
 import { AdminLayout } from '@/components/layouts';
 import AdminGuard from '@/components/AdminGuard';
 import { getProjects } from '@/lib/api/projects';
@@ -24,9 +24,9 @@ export default function AdminDashboardPage() {
       setIsLoading(true);
       const [projectsData, categoriesData] = await Promise.all([
         getProjects(),
-        getAllCategories()
+        getAllCategories(),
       ]);
-      
+
       setProjects(projectsData || []);
       setCategories(categoriesData || []);
     } catch (error) {
@@ -43,7 +43,7 @@ export default function AdminDashboardPage() {
       icon: FileText,
       color: 'text-accent',
       bgColor: 'bg-accent/10',
-      borderColor: 'border-accent/30'
+      borderColor: 'border-accent/30',
     },
     {
       title: 'Categories',
@@ -51,11 +51,11 @@ export default function AdminDashboardPage() {
       icon: FolderOpen,
       color: 'text-neon-purple',
       bgColor: 'bg-neon-purple/10',
-      borderColor: 'border-neon-purple/30'
+      borderColor: 'border-neon-purple/30',
     },
     {
       title: 'Recent Projects',
-      value: projects.filter(p => {
+      value: projects.filter((p) => {
         const createdAt = new Date(p.created_at);
         const weekAgo = new Date();
         weekAgo.setDate(weekAgo.getDate() - 7);
@@ -64,8 +64,8 @@ export default function AdminDashboardPage() {
       icon: BarChart3,
       color: 'text-accent-light',
       bgColor: 'bg-accent-light/10',
-      borderColor: 'border-accent-light/30'
-    }
+      borderColor: 'border-accent-light/30',
+    },
   ];
 
   const quickActions = [
@@ -74,29 +74,29 @@ export default function AdminDashboardPage() {
       description: 'Add a new project to your portfolio',
       icon: Plus,
       color: 'accent',
-      path: '/admin/projects/new'
+      path: '/admin/projects/new',
     },
     {
       title: 'Manage Projects',
       description: 'View and edit existing projects',
       icon: FileText,
       color: 'neon-purple',
-      path: '/admin/projects'
+      path: '/admin/projects',
     },
     {
       title: 'Manage Categories',
       description: 'Add, edit, or delete project categories',
       icon: FolderOpen,
       color: 'accent-light',
-      path: '/admin/categories'
+      path: '/admin/categories',
     },
     {
       title: 'Settings',
       description: 'Configure admin settings',
       icon: Settings,
       color: 'accent-dark',
-      path: '/admin/settings'
-    }
+      path: '/admin/settings',
+    },
   ];
 
   if (isLoading) {
@@ -113,7 +113,10 @@ export default function AdminDashboardPage() {
 
   return (
     <AdminGuard>
-      <AdminLayout title="Admin Dashboard" subtitle="Welcome to the admin panel">
+      <AdminLayout
+        title="Admin Dashboard"
+        subtitle="Welcome to the admin panel"
+      >
         <div className="space-y-8">
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -178,7 +181,7 @@ export default function AdminDashboardPage() {
                 View All →
               </button>
             </div>
-            
+
             {projects.length === 0 ? (
               <div className="text-center py-8">
                 <FileText className="w-16 h-16 text-surface-variant mx-auto mb-4" />
@@ -196,7 +199,11 @@ export default function AdminDashboardPage() {
                   <div
                     key={project.id}
                     className="bg-surface-elevated p-4 rounded-lg border-2 border-surface-variant hover:border-accent transition-colors cursor-pointer group"
-                    onClick={() => router.push(`/projects/${project.category?.id}/${project.id}`)}
+                    onClick={() =>
+                      router.push(
+                        `/projects/${project.category?.id}/${project.id}`,
+                      )
+                    }
                   >
                     {project.thumbnail_url && (
                       <img

@@ -1,10 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import {
-  Project,
-  ProjectInsert,
-  ProjectUpdate,
-  ProjectWithCategory,
-} from '@/types';
+import { ProjectInsert, ProjectUpdate, ProjectWithCategory } from '@/types';
 
 // 모든 프로젝트 가져오기 (카테고리 정보 포함)
 export async function getProjects(): Promise<ProjectWithCategory[] | null> {
