@@ -11,6 +11,7 @@ import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
 import { getProject, deleteProject } from '@/lib/api/projects';
 import { ProjectWithCategory } from '@/types';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
 // 마크다운 뷰어 컴포넌트를 동적으로 import (SSR 방지)
 const MarkdownPreview = dynamic(
@@ -25,6 +26,7 @@ export default function ProjectDetailPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const params = useParams();
+  const { isAuthenticated } = useAdminAuth();
 
   useEffect(() => {
     fetchProject();
@@ -133,6 +135,35 @@ export default function ProjectDetailPage() {
               <div className="gaming-header-border"></div>
             </div>
           </div>
+
+          {/* Admin Actions - Only visible to authenticated admins */}
+          {isAuthenticated && (
+            <div className="flex justify-center gap-4 mb-6">
+              <button
+                onClick={() => router.push(`/admin/projects/${project.id}/edit`)}
+                className="bg-surface-elevated text-neon-purple border-2 border-neon-purple px-4 py-2 hover:bg-neon-purple hover:text-surface transition-all duration-300 flex items-center gap-2"
+              >
+                <Edit size={16} />
+                EDIT PROJECT
+              </button>
+              
+              <button
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className="bg-surface-elevated text-error border-2 border-error px-4 py-2 hover:bg-error hover:text-surface transition-all duration-300 flex items-center gap-2 disabled:opacity-50"
+              >
+                <Trash2 size={16} />
+                {isDeleting ? 'DELETING...' : 'DELETE PROJECT'}
+              </button>
+
+              <button
+                onClick={() => router.push('/admin')}
+                className="bg-surface-elevated text-accent border-2 border-accent px-4 py-2 hover:bg-accent hover:text-surface transition-all duration-300"
+              >
+                ADMIN DASHBOARD
+              </button>
+            </div>
+          )}
 
           <div className="gaming-card mb-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

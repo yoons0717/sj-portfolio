@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     console.log('Checking authentication status...', isAuthenticated);
     if (isAuthenticated) {
-      router.push('/admin/projects/new');
+      router.push('/admin');
     }
     checkInitialSession();
   }, [isAuthenticated, router]);
@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       const success = await login(email, password);
 
       if (success) {
-        router.push('/admin/projects/new');
+        router.push('/admin');
       } else {
         setError('Invalid email or password. Please try again.');
         setPassword('');
