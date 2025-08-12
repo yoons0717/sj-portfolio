@@ -12,6 +12,7 @@ import { Category, CategoryFormData } from '@/types';
 import LoadingState from '@/components/LoadingState';
 import { AdminLayout } from '@/components/layouts';
 import { Button, Input, Select, ColorPicker } from '@/components/ui';
+import AdminGuard from '@/components/AdminGuard';
 
 const iconOptions = [
   { value: 'presentation', label: '📊 Presentation' },
@@ -156,7 +157,8 @@ export default function CategoriesPage() {
   }
 
   return (
-    <AdminLayout
+    <AdminGuard>
+      <AdminLayout
       title="Category Management"
       subtitle="Manage your project categories"
       action={
@@ -392,5 +394,6 @@ export default function CategoriesPage() {
           </div>
         </div>
     </AdminLayout>
+    </AdminGuard>
   );
 }

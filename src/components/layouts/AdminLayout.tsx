@@ -1,4 +1,9 @@
+'use client';
+
 import React from 'react';
+import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -13,6 +18,15 @@ export default function AdminLayout({
   subtitle,
   action,
 }: AdminLayoutProps) {
+  const { logout } = useAdminAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    if (confirm('Are you sure you want to log out?')) {
+      await logout();
+      router.push('/');
+    }
+  };
   return (
     <div
       className="min-h-screen bg-surface text-primary"
@@ -40,7 +54,20 @@ export default function AdminLayout({
               </p>
             )}
           </div>
-          {action && <div className="relative z-10">{action}</div>}
+          
+          <div className="flex items-center gap-4">
+            {action && <div className="relative z-10">{action}</div>}
+            
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="bg-surface-elevated text-error border-2 border-error px-4 py-2 font-bold tracking-wider hover:bg-error hover:text-surface transition-all duration-300 flex items-center gap-2"
+              title="Logout"
+            >
+              <LogOut size={16} />
+              LOGOUT
+            </button>
+          </div>
         </div>
       </header>
 

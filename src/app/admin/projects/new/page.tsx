@@ -10,6 +10,7 @@ import { getAllCategories } from '@/lib/api/categories';
 import FileUpload from '@/components/FileUpload';
 import { AdminLayout } from '@/components/layouts';
 import { Input, Select } from '@/components/ui';
+import AdminGuard from '@/components/AdminGuard';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -196,10 +197,11 @@ const techStack = {
   };
 
   return (
-    <AdminLayout
-      title="Create New Project"
-      subtitle="Add a new project to your portfolio"
-      action={
+    <AdminGuard>
+      <AdminLayout
+        title="Create New Project"
+        subtitle="Add a new project to your portfolio"
+        action={
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.push('/admin/projects')}
@@ -424,6 +426,7 @@ const techStack = {
           </button>
         </div>
       </div>
-    </AdminLayout>
+      </AdminLayout>
+    </AdminGuard>
   );
 }

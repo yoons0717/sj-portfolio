@@ -11,6 +11,7 @@ import FileUpload from '@/components/FileUpload';
 import { AdminLayout } from '@/components/layouts';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
+import AdminGuard from '@/components/AdminGuard';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
@@ -138,7 +139,8 @@ export default function EditProjectPage() {
   }
 
   return (
-    <AdminLayout
+    <AdminGuard>
+      <AdminLayout
       title="Edit Project"
       subtitle="Update project information and content"
       action={
@@ -271,5 +273,6 @@ export default function EditProjectPage() {
         </div>
       </div>
     </AdminLayout>
+    </AdminGuard>
   );
 }
